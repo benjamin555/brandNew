@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.bg.dao.BgContacterDao">
+    
+	<sql id="bgContacterColumns">
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.del_flag AS "delFlag",
+		a.remarks AS "remarks",
+		a.id AS "id",
+		a.name AS "name",
+		a.mobile_number AS "mobileNumber",
+		a.fixed_phone_number AS "fixedPhoneNumber",
+		a.fax_number AS "faxNumber",
+		b.id AS "customer.id",
+		b.name as "customer.name"
+	</sql>
+	
+	<sql id="bgContacterJoins">
+		LEFT JOIN bg_customer b ON b.id = a.customer
+	</sql>
+    
+	<select id="get" resultType="BgContacter">
+		SELECT 
+			<include refid="bgContacterColumns"/>
+		FROM bg_contacter a
+		<include refid="bgContacterJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="BgContacter">
+		SELECT 
+			<include refid="bgContacterColumns"/>
+		FROM bg_contacter a
+		<include refid="bgContacterJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="remarks != null and remarks != ''">
+				AND a.remarks = #{remarks}
+			</if>
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			<if test="mobileNumber != null and mobileNumber != ''">
+				AND a.mobile_number = #{mobileNumber}
+			</if>
+			<if test="fixedPhoneNumber != null and fixedPhoneNumber != ''">
+				AND a.fixed_phone_number = #{fixedPhoneNumber}
+			</if>
+			<if test="faxNumber != null and faxNumber != ''">
+				AND a.fax_number = #{faxNumber}
+			</if>
+			<if test="customer != null and customer != ''">
+				AND a.customer = #{customer.id}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.create_date ASC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="BgContacter">
+		SELECT 
+			<include refid="bgContacterColumns"/>
+		FROM bg_contacter a
+		<include refid="bgContacterJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.create_date ASC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO bg_contacter(
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			del_flag,
+			remarks,
+			id,
+			name,
+			mobile_number,
+			fixed_phone_number,
+			fax_number,
+			customer
+		) VALUES (
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{delFlag},
+			#{remarks},
+			#{id},
+			#{name},
+			#{mobileNumber},
+			#{fixedPhoneNumber},
+			#{faxNumber},
+			#{customer.id}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE bg_contacter SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			name = #{name},
+			mobile_number = #{mobileNumber},
+			fixed_phone_number = #{fixedPhoneNumber},
+			fax_number = #{faxNumber},
+			customer = #{customer.id}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE bg_contacter SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		<choose>
+			<when test="id !=null and id != ''">
+				WHERE id = #{id}
+			</when>
+			<otherwise>
+				WHERE customer = #{customer.id}
+			</otherwise>
+		</choose>
+	</update>
+	
+</mapper>

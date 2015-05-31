@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.bg.dao.BgCaseDao">
+    
+	<sql id="bgCaseColumns">
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.del_flag AS "delFlag",
+		a.remarks AS "remarks",
+		a.lian_date AS "lianDate",
+		a.item_name AS "itemName",
+		a.reg_no AS "regNo",
+		a.delegate_item AS "delegateItem",
+		a.fix_fee AS "fixFee",
+		a.agent_fee AS "agentFee",
+		a.receive_fee AS "receiveFee",
+		a.phone_man_id AS "phoneManId",
+		a.business_man_id AS "businessManId",
+		a.customer_id AS "customerId",
+		a.feedback_month AS "feedbackMonth",
+		a.contacter_id AS "contacterId",
+		a.accept_date AS "acceptDate",
+		a.reject_date AS "rejectDate",
+		a.certificate_date AS "certificateDate"
+	</sql>
+	
+	<sql id="bgCaseJoins">
+	</sql>
+    
+	<select id="get" resultType="BgCase">
+		SELECT 
+			<include refid="bgCaseColumns"/>
+		FROM bg_case a
+		<include refid="bgCaseJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="BgCase">
+		SELECT 
+			<include refid="bgCaseColumns"/>
+		FROM bg_case a
+		<include refid="bgCaseJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="lianDate != null and lianDate != ''">
+				AND a.lian_date = #{lianDate}
+			</if>
+			<if test="itemName != null and itemName != ''">
+				AND a.item_name = #{itemName}
+			</if>
+			<if test="regNo != null and regNo != ''">
+				AND a.reg_no = #{regNo}
+			</if>
+			<if test="phoneManId != null and phoneManId != ''">
+				AND a.phone_man_id = #{phoneManId}
+			</if>
+			<if test="businessManId != null and businessManId != ''">
+				AND a.business_man_id = #{businessManId}
+			</if>
+			<if test="customerId != null and customerId != ''">
+				AND a.customer_id = #{customerId}
+			</if>
+			<if test="feedbackMonth != null and feedbackMonth != ''">
+				AND a.feedback_month = #{feedbackMonth}
+			</if>
+			<if test="contacterId != null and contacterId != ''">
+				AND a.contacter_id = #{contacterId}
+			</if>
+			<if test="acceptDate != null and acceptDate != ''">
+				AND a.accept_date = #{acceptDate}
+			</if>
+			<if test="rejectDate != null and rejectDate != ''">
+				AND a.reject_date = #{rejectDate}
+			</if>
+			<if test="certificateDate != null and certificateDate != ''">
+				AND a.certificate_date = #{certificateDate}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="BgCase">
+		SELECT 
+			<include refid="bgCaseColumns"/>
+		FROM bg_case a
+		<include refid="bgCaseJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO bg_case(
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			del_flag,
+			remarks,
+			lian_date,
+			item_name,
+			reg_no,
+			delegate_item,
+			fix_fee,
+			agent_fee,
+			receive_fee,
+			phone_man_id,
+			business_man_id,
+			customer_id,
+			feedback_month,
+			contacter_id,
+			accept_date,
+			reject_date,
+			certificate_date
+		) VALUES (
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{delFlag},
+			#{remarks},
+			#{lianDate},
+			#{itemName},
+			#{regNo},
+			#{delegateItem},
+			#{fixFee},
+			#{agentFee},
+			#{receiveFee},
+			#{phoneManId},
+			#{businessManId},
+			#{customerId},
+			#{feedbackMonth},
+			#{contacterId},
+			#{acceptDate},
+			#{rejectDate},
+			#{certificateDate}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE bg_case SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			lian_date = #{lianDate},
+			item_name = #{itemName},
+			reg_no = #{regNo},
+			delegate_item = #{delegateItem},
+			fix_fee = #{fixFee},
+			agent_fee = #{agentFee},
+			receive_fee = #{receiveFee},
+			phone_man_id = #{phoneManId},
+			business_man_id = #{businessManId},
+			customer_id = #{customerId},
+			feedback_month = #{feedbackMonth},
+			contacter_id = #{contacterId},
+			accept_date = #{acceptDate},
+			reject_date = #{rejectDate},
+			certificate_date = #{certificateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE bg_case SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
