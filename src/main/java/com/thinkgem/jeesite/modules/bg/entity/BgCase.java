@@ -4,15 +4,16 @@
 package com.thinkgem.jeesite.modules.bg.entity;
 
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonFormat;
+
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.thinkgem.jeesite.common.persistence.DataEntity;
 
 /**
- * 单表生成Entity
+ * 案例生成Entity
  * @author sp
- * @version 2015-05-30
+ * @version 2015-05-31
  */
 public class BgCase extends DataEntity<BgCase> {
 	
@@ -21,17 +22,24 @@ public class BgCase extends DataEntity<BgCase> {
 	private String itemName;		// 专利/商标名称
 	private String regNo;		// 注册号
 	private String delegateItem;		// 代理事项
-	private String fixFee;		// 规费
-	private String agentFee;		// 代理费
-	private String receiveFee;		// 已收金额
+	private Double fixFee;		// 规费
+	private Double agentFee;		// 代理费
+	private Double receiveFee;		// 已收金额
 	private String phoneManId;		// 话务员
 	private String businessManId;		// 业务员
 	private String customerId;		// 客户
-	private String feedbackMonth;		// 提成月份
+	private Integer feedbackMonth;		// 提成月份
 	private String contacterId;		// 联系人
 	private Date acceptDate;		// 国家受通时间
 	private Date rejectDate;		// 驳回时间
 	private Date certificateDate;		// 拿证时间
+	
+	/**
+	 * 联系人名称字符串拼接
+	 */
+	private String contacters;
+	
+	private BgCustomer customer;
 	
 	public BgCase() {
 		super();
@@ -77,27 +85,27 @@ public class BgCase extends DataEntity<BgCase> {
 		this.delegateItem = delegateItem;
 	}
 	
-	public String getFixFee() {
+	public Double getFixFee() {
 		return fixFee;
 	}
 
-	public void setFixFee(String fixFee) {
+	public void setFixFee(Double fixFee) {
 		this.fixFee = fixFee;
 	}
 	
-	public String getAgentFee() {
+	public Double getAgentFee() {
 		return agentFee;
 	}
 
-	public void setAgentFee(String agentFee) {
+	public void setAgentFee(Double agentFee) {
 		this.agentFee = agentFee;
 	}
 	
-	public String getReceiveFee() {
+	public Double getReceiveFee() {
 		return receiveFee;
 	}
 
-	public void setReceiveFee(String receiveFee) {
+	public void setReceiveFee(Double receiveFee) {
 		this.receiveFee = receiveFee;
 	}
 	
@@ -128,12 +136,11 @@ public class BgCase extends DataEntity<BgCase> {
 		this.customerId = customerId;
 	}
 	
-	@Length(min=0, max=11, message="提成月份长度必须介于 0 和 11 之间")
-	public String getFeedbackMonth() {
+	public Integer getFeedbackMonth() {
 		return feedbackMonth;
 	}
 
-	public void setFeedbackMonth(String feedbackMonth) {
+	public void setFeedbackMonth(Integer feedbackMonth) {
 		this.feedbackMonth = feedbackMonth;
 	}
 	
@@ -171,6 +178,22 @@ public class BgCase extends DataEntity<BgCase> {
 
 	public void setCertificateDate(Date certificateDate) {
 		this.certificateDate = certificateDate;
+	}
+
+	public BgCustomer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(BgCustomer customer) {
+		this.customer = customer;
+	}
+
+	public String getContacters() {
+		return contacters;
+	}
+
+	public void setContacters(String contacters) {
+		this.contacters = contacters;
 	}
 	
 }

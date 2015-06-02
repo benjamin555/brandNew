@@ -68,7 +68,7 @@
 		<div class="control-group">
 			<label class="control-label">规费：</label>
 			<div class="controls">
-				<form:input path="fixFee" htmlEscape="false" class="input-xlarge "/>
+				<form:input path="fixFee" htmlEscape="false" class="input-xlarge "  />
 			</div>
 		</div>
 		<div class="control-group">
@@ -98,8 +98,8 @@
 		<div class="control-group">
 			<label class="control-label">客户：</label>
 			<div class="controls">
-				<form:input path="customerId" htmlEscape="false" maxlength="64" class="input-xlarge "/>
-			</div>
+<sys:listSelect id="customer" name="customerId" value="${bgCase.customerId }" labelName="customer" labelValue="${bgCase.customer.name}"
+					title="客户" url="/bg/bgCustomer/list" cssClass="required"/>			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">提成月份：</label>
@@ -107,13 +107,15 @@
 				<form:input path="feedbackMonth" htmlEscape="false" maxlength="11" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<%--<div class="control-group">
 			<label class="control-label">联系人：</label>
 			<div class="controls">
+				<form:select path="contacterId" >
+				</form:select>
 				<form:input path="contacterId" htmlEscape="false" maxlength="64" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		--%><div class="control-group">
 			<label class="control-label">国家受通时间：</label>
 			<div class="controls">
 				<input name="acceptDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "

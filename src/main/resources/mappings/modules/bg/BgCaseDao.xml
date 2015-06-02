@@ -23,10 +23,20 @@
 		a.contacter_id AS "contacterId",
 		a.accept_date AS "acceptDate",
 		a.reject_date AS "rejectDate",
-		a.certificate_date AS "certificateDate"
+		a.certificate_date AS "certificateDate",
+		a.id AS "id"
+		,b.name as "customer.name"
 	</sql>
 	
+	
+	
 	<sql id="bgCaseJoins">
+		left join bg_customer b on b.id =a.customer_id
+	</sql>
+	
+	<sql id="bgCaseJoinsCusConta">
+		left join bg_customer b on b.id =a.customer_id
+		left join bg_contacter c on c.customer =b.id
 	</sql>
     
 	<select id="get" resultType="BgCase">
@@ -128,7 +138,8 @@
 			contacter_id,
 			accept_date,
 			reject_date,
-			certificate_date
+			certificate_date,
+			id
 		) VALUES (
 			#{createBy.id},
 			#{createDate},
@@ -150,7 +161,8 @@
 			#{contacterId},
 			#{acceptDate},
 			#{rejectDate},
-			#{certificateDate}
+			#{certificateDate},
+			#{id}
 		)
 	</insert>
 	

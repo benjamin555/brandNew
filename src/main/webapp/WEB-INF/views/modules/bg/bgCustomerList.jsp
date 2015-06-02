@@ -19,7 +19,9 @@
 <body>
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="${ctx}/bg/bgCustomer/">客户列表</a></li>
+		<c:if test="${!param.select == 'true' }">
 		<shiro:hasPermission name="bg:bgCustomer:edit"><li><a href="${ctx}/bg/bgCustomer/form">客户添加</a></li></shiro:hasPermission>
+		</c:if>
 	</ul>
 	<form:form id="searchForm" modelAttribute="bgCustomer" action="${ctx}/bg/bgCustomer/" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
@@ -44,6 +46,9 @@
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
+				<c:if test="${param.select == 'true' }">
+				<th>选择</th>
+				</c:if>
 				<th>更新时间</th>
 				<th>备注</th>
 				<th>名称</th>
@@ -53,6 +58,11 @@
 		<tbody>
 		<c:forEach items="${page.list}" var="bgCustomer">
 			<tr>
+				<c:if test="${param.select == 'true' }">
+				<td>
+					<input type="radio"  value="${bgCustomer.id} "  descri="${bgCustomer.name}" />
+				</td>
+				</c:if>
 				<td><a href="${ctx}/bg/bgCustomer/form?id=${bgCustomer.id}">
 					<fmt:formatDate value="${bgCustomer.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</a></td>

@@ -3,9 +3,13 @@
  */
 package com.thinkgem.jeesite.modules.bg.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Transformer;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +21,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thinkgem.jeesite.common.config.Global;
 import com.thinkgem.jeesite.common.persistence.Page;
-import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.common.utils.StringUtils;
+import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.bg.entity.BgCase;
+import com.thinkgem.jeesite.modules.bg.entity.BgContacter;
 import com.thinkgem.jeesite.modules.bg.service.BgCaseService;
+import com.thinkgem.jeesite.modules.bg.service.BgCustomerService;
 
 /**
  * 单表生成Controller
@@ -33,6 +39,9 @@ public class BgCaseController extends BaseController {
 
 	@Autowired
 	private BgCaseService bgCaseService;
+	@Autowired
+	private BgCustomerService bgCustomerService;
+	
 	
 	@ModelAttribute
 	public BgCase get(@RequestParam(required=false) String id) {
@@ -50,6 +59,22 @@ public class BgCaseController extends BaseController {
 	@RequestMapping(value = {"list", ""})
 	public String list(BgCase bgCase, HttpServletRequest request, HttpServletResponse response, Model model) {
 		Page<BgCase> page = bgCaseService.findPage(new Page<BgCase>(request, response), bgCase); 
+		List<BgCase> list = page.getList();
+		for (BgCase bgCase2 : list) {
+			List<BgContacter> cs = bgCustomerService.findContacters(bgCase2.getCustomerId());
+			if (CollectionUtils.isNotEmpty(cs)) {
+				List<String> ls = (List<String>) CollectionUtils.collect(cs, new Transformer() {
+					@Override
+					public Object transform(Object input) {
+						return ((BgContacter)input).getName();
+					}
+				});
+				bgCase2.setContacters(org.apache.commons.lang3.StringUtils.join(ls));
+				logger.info("contacters:{}",bgCase2.getContacters());
+			}
+			
+		}
+		
 		model.addAttribute("page", page);
 		return "modules/bg/bgCaseList";
 	}

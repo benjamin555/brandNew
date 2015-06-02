@@ -43,7 +43,8 @@
 				<form:input path="businessManId" htmlEscape="false" maxlength="64" class="input-medium"/>
 			</li>
 			<li><label>客户：</label>
-				<form:input path="customerId" htmlEscape="false" maxlength="64" class="input-medium"/>
+				 <sys:treeselect id="customer" name="customerId" value="${customerId}" labelName="customer" labelValue="${customer.name}"
+					title="客户" url="/sys/area/treeData" cssClass="required"/>
 			</li>
 			<li><label>提成月份：</label>
 				<form:input path="feedbackMonth" htmlEscape="false" maxlength="11" class="input-medium"/>
@@ -137,7 +138,7 @@
 					${bgCase.feedbackMonth}
 				</td>
 				<td>
-					${bgCase.contacterId}
+					${bgCase.contacters}
 				</td>
 				<td>
 					<fmt:formatDate value="${bgCase.acceptDate}" pattern="yyyy-MM-dd HH:mm:ss"/>

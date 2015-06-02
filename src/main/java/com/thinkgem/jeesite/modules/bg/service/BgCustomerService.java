@@ -12,10 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
 import com.thinkgem.jeesite.common.utils.StringUtils;
-import com.thinkgem.jeesite.modules.bg.entity.BgCustomer;
+import com.thinkgem.jeesite.modules.bg.dao.BgContacterDao;
 import com.thinkgem.jeesite.modules.bg.dao.BgCustomerDao;
 import com.thinkgem.jeesite.modules.bg.entity.BgContacter;
-import com.thinkgem.jeesite.modules.bg.dao.BgContacterDao;
+import com.thinkgem.jeesite.modules.bg.entity.BgCustomer;
 
 /**
  * 主子表生成Service
@@ -31,8 +31,17 @@ public class BgCustomerService extends CrudService<BgCustomerDao, BgCustomer> {
 	
 	public BgCustomer get(String id) {
 		BgCustomer bgCustomer = super.get(id);
-		bgCustomer.setBgContacterList(bgContacterDao.findList(new BgContacter(bgCustomer)));
+		bgCustomer.setBgContacterList(findContacters(bgCustomer));
 		return bgCustomer;
+	}
+
+	private List<BgContacter> findContacters(BgCustomer bgCustomer) {
+		return bgContacterDao.findList(new BgContacter(bgCustomer));
+	}
+	
+	public List<BgContacter> findContacters(String bgCustomerId) {
+		BgCustomer bgCustomer = new BgCustomer(bgCustomerId);
+		return bgContacterDao.findList(new BgContacter(bgCustomer));
 	}
 	
 	public List<BgCustomer> findList(BgCustomer bgCustomer) {
