@@ -8,9 +8,9 @@ import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
 import com.thinkgem.jeesite.modules.bg.entity.BgCase;
 
 /**
- * 单表生成DAO接口
+ * 案例生成DAO接口
  * @author sp
- * @version 2015-05-30
+ * @version 2015-05-31
  */
 @MyBatisDao
 public interface BgCaseDao extends CrudDao<BgCase> {
