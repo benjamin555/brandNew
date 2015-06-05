@@ -97,7 +97,7 @@ public class BgCaseController extends BaseController {
 		return "redirect:"+Global.getAdminPath()+"/bg/bgCase/?repage";
 	}
 	
-	@RequiresPermissions("bg:bgCase:edit")
+	@RequiresPermissions("bg:bgCase:del")
 	@RequestMapping(value = "delete")
 	public String delete(BgCase bgCase, RedirectAttributes redirectAttributes) {
 		bgCaseService.delete(bgCase);

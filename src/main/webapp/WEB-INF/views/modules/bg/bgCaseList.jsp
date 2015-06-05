@@ -149,10 +149,10 @@
 				<td>
 					<fmt:formatDate value="${bgCase.certificateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
-				<shiro:hasPermission name="bg:bgCase:edit"><td>
-    				<a href="${ctx}/bg/bgCase/form?id=${bgCase.id}">修改</a>
-					<a href="${ctx}/bg/bgCase/delete?id=${bgCase.id}" onclick="return confirmx('确认要删除该单表吗？', this.href)">删除</a>
-				</td></shiro:hasPermission>
+				<td>
+    				<shiro:hasPermission name="bg:bgCase:edit"><a href="${ctx}/bg/bgCase/form?id=${bgCase.id}">修改</a></shiro:hasPermission>
+					<shiro:hasPermission name="bg:bgCase:del"><a href="${ctx}/bg/bgCase/delete?id=${bgCase.id}" onclick="return confirmx('确认要删除该单表吗？', this.href)">删除</a></shiro:hasPermission>
+				</td>
 			</tr>
 		</c:forEach>
 		</tbody>

@@ -77,7 +77,7 @@ public class BgCustomerController extends BaseController {
 		return "redirect:"+Global.getAdminPath()+"/bg/bgCustomer/?repage";
 	}
 	
-	@RequiresPermissions("bg:bgCustomer:edit")
+	@RequiresPermissions("bg:bgCustomer:del")
 	@RequestMapping(value = "delete")
 	public String delete(BgCustomer bgCustomer, RedirectAttributes redirectAttributes) {
 		bgCustomerService.delete(bgCustomer);
