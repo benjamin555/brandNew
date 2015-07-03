@@ -50,7 +50,7 @@
 				<form:input path="feedbackMonth" htmlEscape="false" maxlength="11" class="input-medium"/>
 			</li>
 			<li><label>联系人：</label>
-				<form:input path="contacterId" htmlEscape="false" maxlength="64" class="input-medium"/>
+				<form:input path="contacter.name" htmlEscape="false" maxlength="64" class="input-medium"/>
 			</li>
 			<li><label>国家受通时间：</label>
 				<input name="acceptDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"

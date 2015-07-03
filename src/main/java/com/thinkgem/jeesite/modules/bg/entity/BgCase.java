@@ -41,6 +41,8 @@ public class BgCase extends DataEntity<BgCase> {
 	
 	private BgCustomer customer;
 	
+	private BgContacter contacter;
+	
 	public BgCase() {
 		super();
 	}
@@ -195,5 +197,14 @@ public class BgCase extends DataEntity<BgCase> {
 	public void setContacters(String contacters) {
 		this.contacters = contacters;
 	}
+
+	public BgContacter getContacter() {
+		return contacter;
+	}
+
+	public void setContacter(BgContacter contacter) {
+		this.contacter = contacter;
+	}
+	
 	
 }
