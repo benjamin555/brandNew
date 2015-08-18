@@ -675,6 +675,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>bg</finalName>
 		<outputDirectory>${project.basedir}/src/main/webapp/WEB-INF/classes/</outputDirectory>
 		<plugins>
 			<!-- Compiler 插件, 设定JDK版本 -->
@@ -828,7 +829,7 @@
 					</warSourceExcludes>
 					<webappDirectory>${project.build.directory}/${project.artifactId}</webappDirectory><!-- 
 					<webXml>${project.basedir}/target/jspweb.xml</webXml> -->
-					<warName>${project.artifactId}</warName>
+					<warName>bg</warName>
 				</configuration>
 			</plugin>
 			
@@ -958,7 +959,6 @@
 				</dependency>
 			</dependencies>
 			<build>
-				<finalName>bg</finalName>
 				<plugins>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
@@ -1015,6 +1015,8 @@
 							</target>
 						</configuration>
 					</plugin>
+					
+					
 				</plugins>
 			</build>
 		</profile>
