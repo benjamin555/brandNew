@@ -132,7 +132,7 @@
 					${bgCase.businessManId}
 				</td>
 				<td>
-					${bgCase.customerId}
+					${bgCase.customer.name}
 				</td>
 				<td>
 					${bgCase.feedbackMonth}
