@@ -87,8 +87,10 @@
 			<if test="certificateDate != null and certificateDate != ''">
 				AND a.certificate_date = #{certificateDate}
 			</if>
+			<if test="contacter != null">
 			<if test="contacter.name != null and contacter.name != ''">
 				AND c.name = #{contacter.name}
+			</if>
 			</if>
 		</where>
 		<choose>

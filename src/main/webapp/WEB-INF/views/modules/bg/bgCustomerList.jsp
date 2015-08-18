@@ -24,6 +24,8 @@
 		</c:if>
 	</ul>
 	<form:form id="searchForm" modelAttribute="bgCustomer" action="${ctx}/bg/bgCustomer/" method="post" class="breadcrumb form-search">
+		
+		<input id="select" name="select" type="hidden" value="${param.select}"/>
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
