@@ -14,6 +14,19 @@
 
 	<description>Spring Configuration</description>
 	
+	<!-- 定义受环境影响易变的变量 -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<!-- 标准配置 -->
+				<value>file:C:\bgconfig\main.properties</value>
+				<value>file:/usr/local/bgconfig/main.properties</value>
+			</list>
+		</property>
+	</bean>
+	
     <!-- 加载配置属性文件 -->
 	<context:property-placeholder ignore-unresolvable="true" location="classpath:jeesite.properties" />
 	
