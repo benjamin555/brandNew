@@ -827,9 +827,9 @@
 						<!-- userfiles/** --><!-- ,/**/*.jsp -->,
 						test/**
 					</warSourceExcludes>
-					<webappDirectory>${project.build.directory}/${project.artifactId}</webappDirectory><!-- 
+					<webappDirectory>${project.build.directory}/${project.finalName}</webappDirectory><!-- 
 					<webXml>${project.basedir}/target/jspweb.xml</webXml> -->
-					<warName>bg</warName>
+					<warName>${project.finalName}</warName>
 				</configuration>
 			</plugin>
 			
