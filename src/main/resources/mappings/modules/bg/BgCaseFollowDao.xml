@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.bg.dao.BgCaseFollowDao">
+    
+	<sql id="bgCaseFollowColumns">
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.del_flag AS "delFlag",
+		a.remarks AS "remarks",
+		a.id AS "id",
+		a.descrip AS "descrip",
+		a.case_id AS "caseId"
+	</sql>
+	
+	<sql id="bgCaseFollowJoins">
+	</sql>
+    
+	<select id="get" resultType="BgCaseFollow">
+		SELECT 
+			<include refid="bgCaseFollowColumns"/>
+		FROM bg_case_follow a
+		<include refid="bgCaseFollowJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="BgCaseFollow">
+		SELECT 
+			<include refid="bgCaseFollowColumns"/>
+		FROM bg_case_follow a
+		<include refid="bgCaseFollowJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="BgCaseFollow">
+		SELECT 
+			<include refid="bgCaseFollowColumns"/>
+		FROM bg_case_follow a
+		<include refid="bgCaseFollowJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO bg_case_follow(
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			del_flag,
+			remarks,
+			id,
+			descrip,
+			case_id
+		) VALUES (
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{delFlag},
+			#{remarks},
+			#{id},
+			#{descrip},
+			#{caseId}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE bg_case_follow SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			descrip = #{descrip},
+			case_id = #{caseId}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE bg_case_follow SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

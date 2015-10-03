@@ -7,7 +7,13 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			
+			
+			
 		});
+		function resetForm(){
+			debugger;
+			$("#searchForm").find(".ul-form input[type='text']").val(null);
+		}
 		function page(n,s){
 			$("#pageNo").val(n);
 			$("#pageSize").val(s);
@@ -67,7 +73,10 @@
 					value="<fmt:formatDate value="${bgCase.certificateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
 					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
 			</li>
-			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
+			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/>
+			<input  class="btn btn-primary" type="button" onclick="resetForm();" value="重置"/>
+			</li>
+			
 			<li class="clearfix"></li>
 		</ul>
 	</form:form>
@@ -152,6 +161,8 @@
 				<td>
     				<shiro:hasPermission name="bg:bgCase:edit"><a href="${ctx}/bg/bgCase/form?id=${bgCase.id}">修改</a></shiro:hasPermission>
 					<shiro:hasPermission name="bg:bgCase:del"><a href="${ctx}/bg/bgCase/delete?id=${bgCase.id}" onclick="return confirmx('确认要删除该单表吗？', this.href)">删除</a></shiro:hasPermission>
+				
+					<a href="${ctx}/bg/bgCaseFollow/form?caseId=${bgCase.id}">跟进</a>
 				</td>
 			</tr>
 		</c:forEach>
