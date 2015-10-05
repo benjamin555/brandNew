@@ -9,6 +9,8 @@
 	<bean id="mailFacade" class="com.thinkgem.jeesite.modules.mail.MailFacade">
 		<property name="systemMail" value="${mail.system.from.address}" />
 		<property name="systemMailPass" value="${mail.system.from.password}" />
+		<property name="smtpHost" value="${mail.smtp.host}" />
+		
 	</bean>
 	
 </beans>

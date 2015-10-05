@@ -14,25 +14,23 @@ import javax.mail.internet.MimeMessage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 /**
 * @author 陈嘉镇
 * @version 创建时间：2015-10-4 上午8:48:22
 */
-@Component
 public class MailFacade {
 	
 	private static final String MESSAGE_TYPE = "text/html;charset=gb2312";
 	private   String systemMailPass;
 	private   String systemMail;
-	private static final String SMTP_HOST = "smtp.qq.com";
+	private String smtpHost;
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	public void sendMail(String to, String subject,
 			String messageText) {
 		try {
-			this.sendMessage(SMTP_HOST, systemMail, systemMailPass, to,
+			this.sendMessage(smtpHost, systemMail, systemMailPass, to,
 					subject, messageText, MESSAGE_TYPE);
 		} catch (MessagingException e) {
 			logger.error("",e);
@@ -90,6 +88,14 @@ public class MailFacade {
 
 	public void setSystemMail(String systemMail) {
 		this.systemMail = systemMail;
+	}
+
+	public String getSmtpHost() {
+		return smtpHost;
+	}
+
+	public void setSmtpHost(String smtpHost) {
+		this.smtpHost = smtpHost;
 	}
 
 }

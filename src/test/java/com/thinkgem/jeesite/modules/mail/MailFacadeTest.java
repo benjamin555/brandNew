@@ -20,7 +20,7 @@ public class MailFacadeTest {
 	
 	@Test
 	public void testSendMail() throws Exception {
-		mailFacade.sendMail( "a114807134@163.com",
+		mailFacade.sendMail( "benjamin555@foxmail.com",
 				"nihao", "---------------wrwe-----------");
 
 	}
