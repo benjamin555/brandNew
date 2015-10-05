@@ -13,3 +13,5 @@ CREATE TABLE bg_case_follow
 	case_id varchar(64) NOT NULL COMMENT '案件id',
 	PRIMARY KEY (id)
 ) COMMENT = '案件进度';
+
+alter table bg_case_follow add remind_time datetime COMMENT '提醒时间';
