@@ -62,4 +62,10 @@ public class MailJob implements Job {
 		this.mailVO = mailVO;
 	}
 
+
+	@Override
+	public String toString() {
+		return "MailJob [mailVO=" + mailVO + "]";
+	}
+
 }

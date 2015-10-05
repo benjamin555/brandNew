@@ -42,6 +42,11 @@ public class MailVO implements Serializable{
 	public void setToAddress(String toAddress) {
 		this.toAddress = toAddress;
 	}
+
+	@Override
+	public String toString() {
+		return "MailVO [subject=" + subject + ", content=" + content + ", toAddress=" + toAddress + "]";
+	}
 	
 	
 

@@ -11,7 +11,8 @@
 		a.remarks AS "remarks",
 		a.id AS "id",
 		a.descrip AS "descrip",
-		a.case_id AS "caseId"
+		a.case_id AS "caseId",
+		a.remind_time AS "remindTime"
 	</sql>
 	
 	<sql id="bgCaseFollowJoins">
@@ -71,7 +72,8 @@
 			remarks,
 			id,
 			descrip,
-			case_id
+			case_id,
+			remind_time
 		) VALUES (
 			#{createBy.id},
 			#{createDate},
@@ -81,7 +83,8 @@
 			#{remarks},
 			#{id},
 			#{descrip},
-			#{caseId}
+			#{caseId},
+			#{remindTime}
 		)
 	</insert>
 	
@@ -91,7 +94,8 @@
 			update_date = #{updateDate},
 			remarks = #{remarks},
 			descrip = #{descrip},
-			case_id = #{caseId}
+			case_id = #{caseId},
+			remind_time = #{remindTime}
 		WHERE id = #{id}
 	</update>
 	

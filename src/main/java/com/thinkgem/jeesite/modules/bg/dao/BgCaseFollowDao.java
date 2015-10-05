@@ -10,7 +10,7 @@ import com.thinkgem.jeesite.modules.bg.entity.BgCaseFollow;
 /**
  * 案例进度生成DAO接口
  * @author sp
- * @version 2015-10-03
+ * @version 2015-10-05
  */
 @MyBatisDao
 public interface BgCaseFollowDao extends CrudDao<BgCaseFollow> {

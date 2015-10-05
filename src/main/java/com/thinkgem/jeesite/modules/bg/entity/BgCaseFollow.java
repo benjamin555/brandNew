@@ -4,19 +4,22 @@
 package com.thinkgem.jeesite.modules.bg.entity;
 
 import org.hibernate.validator.constraints.Length;
+import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import com.thinkgem.jeesite.common.persistence.DataEntity;
 
 /**
  * 案例进度生成Entity
  * @author sp
- * @version 2015-10-03
+ * @version 2015-10-05
  */
 public class BgCaseFollow extends DataEntity<BgCaseFollow> {
 	
 	private static final long serialVersionUID = 1L;
-	private String descrip;		// 描述
+	private String descrip;		// descrip : 描述
 	private String caseId;		// 案件id
+	private Date remindTime;		// 提醒时间
 	
 	public BgCaseFollow() {
 		super();
@@ -26,7 +29,7 @@ public class BgCaseFollow extends DataEntity<BgCaseFollow> {
 		super(id);
 	}
 
-	@Length(min=0, max=4000, message="描述长度必须介于 0 和 4000 之间")
+	@Length(min=0, max=4000, message="descrip : 描述长度必须介于 0 和 4000 之间")
 	public String getDescrip() {
 		return descrip;
 	}
@@ -42,6 +45,15 @@ public class BgCaseFollow extends DataEntity<BgCaseFollow> {
 
 	public void setCaseId(String caseId) {
 		this.caseId = caseId;
+	}
+	
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getRemindTime() {
+		return remindTime;
+	}
+
+	public void setRemindTime(Date remindTime) {
+		this.remindTime = remindTime;
 	}
 	
 }

@@ -39,6 +39,14 @@
 				<form:textarea path="descrip" htmlEscape="false" maxlength="4000" class="input-xlarge "/>
 			</div>
 		</div>
+		<div class="control-group">
+			<label class="control-label">提醒时间：</label>
+			<div class="controls">
+				<input name="remindTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
+					value="<fmt:formatDate value="${bgCaseFollow.remindTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"
+					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+			</div>
+		</div>
 		<form:hidden path="caseId" htmlEscape="false" maxlength="64" class="input-xlarge required"/>
 		<div class="form-actions">
 			<shiro:hasPermission name="bg:bgCaseFollow:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>

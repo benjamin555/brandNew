@@ -37,6 +37,7 @@ public class SchedulerFacade {
 	private StdScheduler sf;
 	
 	public void addMailJob(MailJob job ,Date date) {
+		logger.info("job:{},date:{}",job,date);
 		addJob(job, CommonUtils.getCron(date));
 	}
 
