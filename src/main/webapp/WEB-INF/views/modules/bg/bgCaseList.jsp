@@ -11,7 +11,6 @@
 			
 		});
 		function resetForm(){
-			debugger;
 			$("#searchForm").find(".ul-form input[type='text']").val(null);
 		}
 		function page(n,s){
@@ -49,8 +48,9 @@
 				<form:input path="businessManId" htmlEscape="false" maxlength="64" class="input-medium"/>
 			</li>
 			<li><label>客户：</label>
-				 <sys:treeselect id="customer" name="customerId" value="${customerId}" labelName="customer" labelValue="${customer.name}"
-					title="客户" url="/sys/area/treeData" cssClass="required"/>
+					
+				<sys:listSelect id="customer" name="customerId" value="${customerId }" labelName="customer" labelValue="${customer.name}"
+					title="客户" url="/bg/bgCustomer/list" cssClass="required"/>	
 			</li>
 			<li><label>提成月份：</label>
 				<form:input path="feedbackMonth" htmlEscape="false" maxlength="11" class="input-medium"/>

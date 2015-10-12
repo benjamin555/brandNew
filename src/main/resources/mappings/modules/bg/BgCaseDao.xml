@@ -51,7 +51,7 @@
 		SELECT 
 			<include refid="bgCaseColumns"/>
 		FROM bg_case a
-		<include refid="bgCaseJoins"/>
+		<include refid="bgCaseJoinsCusConta"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
 			<if test="lianDate != null and lianDate != ''">
