@@ -41,7 +41,7 @@
 			<li><label>注册号：</label>
 				<form:input path="regNo" htmlEscape="false" maxlength="20" class="input-medium"/>
 			</li>
-			<li><label>话务员：</label>
+			<li><label>欠费栏：</label>
 				<form:input path="phoneManId" htmlEscape="false" maxlength="64" class="input-medium"/>
 			</li>
 			<li><label>业务员：</label>
@@ -93,7 +93,7 @@
 				<th>规费</th>
 				<th>代理费</th>
 				<th>已收金额</th>
-				<th>话务员</th>
+				<th>欠费栏</th>
 				<th>业务员</th>
 				<th>客户</th>
 				<th>提成月份</th>

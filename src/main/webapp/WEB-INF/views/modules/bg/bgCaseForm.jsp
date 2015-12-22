@@ -84,7 +84,7 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">话务员：</label>
+			<label class="control-label">欠费栏：</label>
 			<div class="controls">
 				<form:input path="phoneManId" htmlEscape="false" maxlength="64" class="input-xlarge "/>
 			</div>
