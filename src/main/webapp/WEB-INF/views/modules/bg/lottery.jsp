@@ -28,7 +28,7 @@
 						<legend></legend>
 					</fieldset>
 					<div class="list">
-						<p>神秘西藏之旅（可任意选择一条2014全年游侠客西藏专题线路）</p>
+						<p></p>
 						<ul class="win">
 							<li>
 								<div class="avatar">
@@ -47,7 +47,7 @@
 						<legend></legend>
 					</fieldset>
 					<div class="list">
-						<p>大美青海之旅（可任意选择一条2014全年游侠客青海湖-敦煌环线线路）</p>
+						<p></p>
 						<ul class="win">
 							<li class="none">
 								<div class="avatar">
@@ -66,7 +66,7 @@
 						<legend></legend>
 					</fieldset>
 					<div class="list">
-						<p>坝上草原之旅（可任意选择一条2014全年游侠客坝上草原线路 ）</p>
+						<p></p>
 						<ul class="win">
 							<li class="none">
 								<div class="avatar">
@@ -85,7 +85,7 @@
 						<legend></legend>
 					</fieldset>
 					<div class="list">
-						<p>华东单日游（可任意选择一条2014全年游侠客独家华东单日游线路 ）</p>
+						<p></p>
 						<ul class="win">
 							<li class="none">
 								<div class="avatar">

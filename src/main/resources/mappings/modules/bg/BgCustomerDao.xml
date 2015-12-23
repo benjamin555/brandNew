@@ -43,7 +43,7 @@
 				AND b.mobile_number = #{bgContacterList[0].mobileNumber}
 				</if>
 				<if test="bgContacterList[0].name!=''">
-				AND b.name LIKE concat('%',#{name},'%')
+				AND b.name LIKE concat('%',#{bgContacterList[0].name},'%')
 				</if>
 			</if>
 		</where>
