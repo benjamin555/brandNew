@@ -13,9 +13,11 @@
 		a.ri_date AS "riDate",
 		a.today_remark AS "todayRemark",
 		a.tomorrow_plan AS "tomorrowPlan"
+		,u.name as "createBy.name"
 	</sql>
 	
 	<sql id="bgDailyJoins">
+		join sys_user u on u.id = a.create_by
 	</sql>
     
 	<select id="get" resultType="BgDaily">

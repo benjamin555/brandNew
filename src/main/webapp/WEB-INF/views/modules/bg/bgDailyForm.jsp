@@ -47,6 +47,17 @@
 					onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
 			</div>
 		</div>
+		
+		
+		<div class="control-group">
+			<label class="control-label">创建人：</label>
+			<div class="controls">
+				<input type="text" readonly="readonly" 
+					value="${bgDaily.createBy.name}"
+					/>
+			</div>
+		</div>
+		
 		<div class="control-group">
 			<label class="control-label">意向客户及情况：</label>
 			<div class="controls">

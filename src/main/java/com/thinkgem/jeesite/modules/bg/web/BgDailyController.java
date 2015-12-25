@@ -62,6 +62,11 @@ public class BgDailyController extends BaseController {
 	@RequiresPermissions("bg:bgDaily:view")
 	@RequestMapping(value = "form")
 	public String form(BgDaily bgDaily, Model model) {
+		
+		if (bgDaily.getCreateBy()==null) {
+			bgDaily.setCreateBy(UserUtils.getUser());
+		}
+		
 		model.addAttribute("bgDaily", bgDaily);
 		return "modules/bg/bgDailyForm";
 	}
