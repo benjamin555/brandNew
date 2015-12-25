@@ -459,6 +459,8 @@ legend:after{
     top: 0;
     left: 0;
     z-index: 9;
+    background: red url(../images/bg.JPG) no-repeat 50% 50%; 
+    background-size:contain;
 }
 
 .html5_video{
@@ -469,7 +471,6 @@ legend:after{
     position: absolute;
     top: 0;
     left: 0;
-    
     min-width: 100%;
     min-height: 100%;
 }

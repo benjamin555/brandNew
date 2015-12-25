@@ -101,9 +101,9 @@
 			</div>
 		</aside>
 		<section id="container" class="clearfix">
-			<div class="html5_video">
+			<div class="html5_video"><%--
 				<video autoplay loop src="${ctxStatic }/video/cloud.mp4"></video>
-			</div>
+			--%></div>
 			<div id="copyleft">
 				<div class="favicon">K</div>
 				<div class="copyright">kpoda.com</div>
