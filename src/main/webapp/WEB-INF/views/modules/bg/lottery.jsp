@@ -113,14 +113,14 @@
 					<img src="${ctxStatic }/images/truth.jpg" width="150" />
 				</div>
 				<div class="counter-container clearfix">
-					<div class="counter">
+					<div class="counter"  style="visibility: hidden;">
 						<ul class="prefix">
 							<li>*</li>
 							<li>*</li>
 							<li>*</li>
 						</ul>
 					</div>
-					<div class="counter">
+					<div class="counter" style="display: none;">
 						<ul class="none">
 							<li>*</li>
 							<li>*</li>
@@ -247,7 +247,7 @@
 
 			var newItem = selector.find('li:eq(0)').clone().removeAttr('class').attr({'data-num': num}).css({'margin-left': 300});
 
-			newItem.find('.num').html( data[ 'tel' ].replace(data[ 'tel' ].substr(3, 4), '****') );
+			newItem.find('.num').html( data[ 'tel' ].replace(data[ 'tel' ].substr(0, 7), '') );
 		    //newItem.find('.avatar img').attr('src', data[ 'url' ]);
 			newItem.find('.name').html(data[ 'nick' ]);
 
@@ -275,7 +275,7 @@
 						var none = newItem.clone().addClass('none').removeAttr('style');
 
 						none.find('.num').html('***********');
-						none.find('.avatar img').attr('src', 'images/blank.gif');
+						none.find('.avatar img').attr('src', '${ctxStatic}/images/blank.gif');
 						none.find('.name').html('');	
 
 						none.prependTo( selector.find('.win') )
