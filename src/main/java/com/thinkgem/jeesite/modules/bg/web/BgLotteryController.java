@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.thinkgem.jeesite.common.web.BaseController;
-import com.thinkgem.jeesite.modules.bg.entity.BgDaily;
 
 /**
  * 日报生成Controller
@@ -22,8 +22,12 @@ import com.thinkgem.jeesite.modules.bg.entity.BgDaily;
 @RequestMapping(value = "${adminPath}/bg/bgLottery")
 public class BgLotteryController extends BaseController {
 	
-	@RequestMapping(value = {""})
-	public String list(BgDaily bgDaily, HttpServletRequest request, HttpServletResponse response, Model model) {
+	@RequestMapping(value = {"","{personCnt}"})
+	public String list(@PathVariable("personCnt")Integer personCnt, HttpServletRequest request, HttpServletResponse response, Model model) {
+		if (personCnt==null) {
+			personCnt = 500;
+		}
+		model.addAttribute("personCnt", personCnt);
 		return "modules/bg/lottery";
 	}
 

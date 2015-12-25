@@ -142,6 +142,13 @@
 	</div>
 	<script type="text/javascript"
 		src="${ctxStatic }/jquery/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript">
+		var personCnt = ${personCnt};
+		if(personCnt>999){
+			alert("不能超过999");
+		}
+	
+	</script>
 	<script type="text/javascript" src="${ctxStatic }/js/dataSource.js"></script>
 	<script type="text/javascript">
 	//除chrome外，其他支持需要在服务器上运行才支持
