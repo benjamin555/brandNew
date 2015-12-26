@@ -110,7 +110,7 @@
 			</div>
 			<section id="content" class="clearfix">
 				<div class="flicker">
-					<img src="${ctxStatic }/images/truth.jpg" width="150" />
+					<img src="${ctxStatic }/images/truth.jpg" width="150"  style="display: none;" />
 				</div>
 				<div class="counter-container clearfix">
 					<div class="counter"  style="visibility: hidden;">
@@ -319,7 +319,7 @@
 
 					console.log( $('.grateful li:not(.none)').length )
 					//当删除未领奖的时候，默认启用一次抽一次
-					config.awards == 'grateful' && taxis( $('.grateful li:not(.none)').length % 5 );
+					config.awards == 'grateful' && taxis( $('.grateful li:not(.none)').length % 1 );
 				}
 			}
 		})
@@ -329,7 +329,7 @@
 			var i = i || 0;
 
 			setTimeout(function(){
-				if( ++i < 5 ) {
+				if( ++i < 1 ) {
 					boot.aStart();
 					boot.lottery();
 
