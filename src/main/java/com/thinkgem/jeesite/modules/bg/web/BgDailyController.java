@@ -3,6 +3,8 @@
  */
 package com.thinkgem.jeesite.modules.bg.web;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -43,6 +45,7 @@ public class BgDailyController extends BaseController {
 		}
 		if (entity == null){
 			entity = new BgDaily();
+			entity.setRiDate(new Date());
 		}
 		return entity;
 	}

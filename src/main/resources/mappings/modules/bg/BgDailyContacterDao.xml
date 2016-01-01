@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.bg.dao.BgDailyContacterDao">
+    
+	<sql id="bgDailyContacterColumns">
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.del_flag AS "delFlag",
+		a.remarks AS "remarks",
+		a.id AS "id",
+		a.name AS "name",
+		a.mobile_number AS "mobileNumber",
+		a.brand AS "brand",
+		a.typ AS "typ",
+		a.hid AS "hid"
+	</sql>
+	
+	<sql id="bgDailyContacterJoins">
+	</sql>
+    
+	<select id="get" resultType="BgDailyContacter">
+		SELECT 
+			<include refid="bgDailyContacterColumns"/>
+		FROM bg_daily_contacter a
+		<include refid="bgDailyContacterJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="BgDailyContacter">
+		SELECT 
+			<include refid="bgDailyContacterColumns"/>
+		FROM bg_daily_contacter a
+		<include refid="bgDailyContacterJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			
+			<if test="hid != null and hid != ''">
+				AND a.hid = #{hid}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="BgDailyContacter">
+		SELECT 
+			<include refid="bgDailyContacterColumns"/>
+		FROM bg_daily_contacter a
+		<include refid="bgDailyContacterJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO bg_daily_contacter(
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			del_flag,
+			remarks,
+			id,
+			name,
+			mobile_number,
+			brand,
+			typ,
+			hid
+		) VALUES (
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{delFlag},
+			#{remarks},
+			#{id},
+			#{name},
+			#{mobileNumber},
+			#{brand},
+			#{typ},
+			#{hid}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE bg_daily_contacter SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			name = #{name},
+			mobile_number = #{mobileNumber},
+			brand = #{brand},
+			typ = #{typ},
+			hid = #{hid}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE bg_daily_contacter SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

@@ -4,9 +4,11 @@
 package com.thinkgem.jeesite.modules.bg.entity;
 
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.List;
+
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.thinkgem.jeesite.common.persistence.DataEntity;
 
 /**
@@ -20,6 +22,9 @@ public class BgDaily extends DataEntity<BgDaily> {
 	private Date riDate;		// 日期
 	private String todayRemark;		// 意向客户及情况
 	private String tomorrowPlan;		// 明天重点客户及情况
+	
+	
+	private List<BgDailyContacter> bgDailyContacterList;
 	
 	public BgDaily() {
 		super();
@@ -55,5 +60,19 @@ public class BgDaily extends DataEntity<BgDaily> {
 	public void setTomorrowPlan(String tomorrowPlan) {
 		this.tomorrowPlan = tomorrowPlan;
 	}
+
+	public List<BgDailyContacter> getBgDailyContacterList() {
+		return bgDailyContacterList;
+	}
+
+	public void setBgDailyContacterList(List<BgDailyContacter> bgDailyContacterList) {
+		this.bgDailyContacterList = bgDailyContacterList;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	
 	
 }
