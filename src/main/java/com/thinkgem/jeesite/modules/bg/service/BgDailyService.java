@@ -51,23 +51,26 @@ public class BgDailyService extends CrudService<BgDailyDao, BgDaily> {
 	@Transactional(readOnly = false)
 	public void save(BgDaily bgDaily) {
 		super.save(bgDaily);
-		for (BgDailyContacter bgContacter : bgDaily.getBgDailyContacterList()) {
-			if (bgDaily.getId() == null) {
-				break;
-			}
-			bgContacter.setHid(bgDaily.getId());
-			if (BgDailyContacter.DEL_FLAG_NORMAL.equals(bgContacter.getDelFlag())) {
-				if (StringUtils.isBlank(bgContacter.getId())) {
-					bgContacter.preInsert();
-					bgDailyContacterDao.insert(bgContacter);
-				} else {
-					bgContacter.preUpdate();
-					bgDailyContacterDao.update(bgContacter);
+		if(bgDaily.getBgDailyContacterList()!=null){
+			for (BgDailyContacter bgContacter : bgDaily.getBgDailyContacterList()) {
+				if (bgDaily.getId() == null) {
+					break;
 				}
-			} else {
-				bgDailyContacterDao.delete(bgContacter);
+				bgContacter.setHid(bgDaily.getId());
+				if (BgDailyContacter.DEL_FLAG_NORMAL.equals(bgContacter.getDelFlag())) {
+					if (StringUtils.isBlank(bgContacter.getId())) {
+						bgContacter.preInsert();
+						bgDailyContacterDao.insert(bgContacter);
+					} else {
+						bgContacter.preUpdate();
+						bgDailyContacterDao.update(bgContacter);
+					}
+				} else {
+					bgDailyContacterDao.delete(bgContacter);
+				}
 			}
 		}
+		
 
 	}
 
