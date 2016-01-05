@@ -18,6 +18,7 @@
 	
 	<sql id="bgDailyJoins">
 		join sys_user u on u.id = a.create_by
+		left join bg_daily_contacter d on d.hid = a.id
 	</sql>
     
 	<select id="get" resultType="BgDaily">
@@ -54,6 +55,16 @@
 					<if test="dbName == 'mssql'">'%'+#{tomorrowPlan}+'%'</if>
 					<if test="dbName == 'mysql'">concat('%',#{tomorrowPlan},'%')</if>
 			</if>
+			
+			<if test="bgDailyContacterList != null and bgDailyContacterList.size>0  ">
+				<if test="bgDailyContacterList[0].mobileNumber!=''">
+				AND d.mobile_number = #{bgDailyContacterList[0].mobileNumber}
+				</if>
+				<if test="bgDailyContacterList[0].name!=''">
+				AND d.name LIKE concat('%',#{bgDailyContacterList[0].name},'%')
+				</if>
+			</if>
+			
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">

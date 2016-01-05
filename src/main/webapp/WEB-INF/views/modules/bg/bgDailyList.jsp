@@ -28,17 +28,31 @@
 			<li><label>日期：</label>
 				<input name="riDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
 					value="<fmt:formatDate value="${bgDaily.riDate}" pattern="yyyy-MM-dd"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+					onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});"/>
 			</li>
-			<li><label>意向客户及情况：</label>
+			<li><label style="width: 120px;">意向客户及情况：</label>
 				<form:input path="todayRemark" htmlEscape="false" maxlength="1000" class="input-medium"/>
 			</li>
-			<li><label>明天重点客户及情况：</label>
+			<li><label style="width: 150px;">明天重点客户及情况：</label>
 				<form:input path="tomorrowPlan" htmlEscape="false" maxlength="1000" class="input-medium"/>
 			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>
+		
+		<ul class="ul-form">
+			<li><label >联系人：</label>
+					<form:input path="bgDailyContacterList[0].name" htmlEscape="false" maxlength="1000" class="input-medium"/>
+			</li>
+			<li><label style="width: 120px;">联系电话：</label>
+				<form:input path="bgDailyContacterList[0].mobileNumber" htmlEscape="false" maxlength="1000" class="input-medium"/>
+			</li>
+			<li>
+			</li>
+			<li class="btns"></li>
+			<li class="clearfix"></li>
+		</ul>
+		
 	</form:form>
 	<sys:message content="${message}"/>
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
