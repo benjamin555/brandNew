@@ -22,7 +22,7 @@
 	</sql>
     
 	<select id="get" resultType="BgDaily">
-		SELECT 
+		SELECT DISTINCT 
 			<include refid="bgDailyColumns"/>
 		FROM bg_daily a
 		<include refid="bgDailyJoins"/>
@@ -30,7 +30,7 @@
 	</select>
 	
 	<select id="findList" resultType="BgDaily">
-		SELECT 
+		SELECT DISTINCT 
 			<include refid="bgDailyColumns"/>
 		FROM bg_daily a
 		<include refid="bgDailyJoins"/>
@@ -77,7 +77,7 @@
 	</select>
 	
 	<select id="findAllList" resultType="BgDaily">
-		SELECT 
+		SELECT DISTINCT 
 			<include refid="bgDailyColumns"/>
 		FROM bg_daily a
 		<include refid="bgDailyJoins"/>
