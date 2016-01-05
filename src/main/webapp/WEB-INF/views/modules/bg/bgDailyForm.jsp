@@ -152,7 +152,7 @@
 							<td>
 								<input id="bgDailyContacterList{{idx}}_typ" name="bgDailyContacterList[{{idx}}].typ" type="text" value="{{row.typ}}" maxlength="20" class="input-small "/>
 							</td>
-							<shiro:hasPermission name="bg:bg:bgDaily:edit:edit"><td class="text-center" width="10">
+							<shiro:hasPermission name="bg:bgDaily:edit"><td class="text-center" width="10">
 								{{#delBtn}}<span class="close" onclick="delRow(this, '#bgDailyContacterList{{idx}}')" title="删除">&times;</span>{{/delBtn}}
 							</td></shiro:hasPermission>
 						</tr>//-->
