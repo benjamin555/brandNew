@@ -23,8 +23,11 @@ public class BgDaily extends DataEntity<BgDaily> {
 	private String todayRemark;		// 意向客户及情况
 	private String tomorrowPlan;		// 明天重点客户及情况
 	
+	private String agentJob;//代理事项
 	
 	private List<BgDailyContacter> bgDailyContacterList;
+	
+	private List<BgDailyCustomer> bgDailyCustomerList;
 	
 	public BgDaily() {
 		super();
@@ -71,6 +74,22 @@ public class BgDaily extends DataEntity<BgDaily> {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getAgentJob() {
+		return agentJob;
+	}
+
+	public void setAgentJob(String agentJob) {
+		this.agentJob = agentJob;
+	}
+
+	public List<BgDailyCustomer> getBgDailyCustomerList() {
+		return bgDailyCustomerList;
+	}
+
+	public void setBgDailyCustomerList(List<BgDailyCustomer> bgDailyCustomerList) {
+		this.bgDailyCustomerList = bgDailyCustomerList;
 	}
 	
 	

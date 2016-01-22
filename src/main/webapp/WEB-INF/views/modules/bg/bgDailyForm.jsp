@@ -96,6 +96,15 @@
 			</div>
 		</div>
 		
+		
+		<div class="control-group">
+			<label class="control-label">代理事项：</label>
+			<div class="controls">
+				<form:textarea path="agentJob" htmlEscape="false" rows="6" maxlength="1000" cssStyle="width: 95%;" class="input-xxlarge "/>
+			</div>
+		</div>
+		
+		
 		<div class="control-group">
 			<label class="control-label">意向客户及情况：</label>
 			<div class="controls">
@@ -172,6 +181,52 @@
 					
 				</div>
 			</div>
+			
+			
+			
+			
+			
+			<div class="control-group">
+				<label class="control-label">意向客户情况</label>
+				<div class="controls">
+					<table id="contentTable" class="table table-striped table-bordered table-condensed">
+						<tbody id="bgDailyCustomerList">
+						</tbody>
+						<shiro:hasPermission name="bg:bgDaily:edit"><tfoot>
+							<tr><td colspan="7"><a href="javascript:" onclick="addRow('#bgDailyCustomerList', bgDailyCustomerRowIdx, bgDailyCustomerTpl);bgDailyCustomerRowIdx = bgDailyCustomerRowIdx + 1;" class="btn">新增</a></td></tr>
+						</tfoot></shiro:hasPermission>
+					</table>
+					<script type="text/template" id="bgDailyCustomerTpl">//<!--
+						<tr id="bgDailyCustomerList{{idx}}">
+							<td class="hide">
+								<input id="bgDailyCustomerList{{idx}}_id" name="bgDailyCustomerList[{{idx}}].id" type="hidden" value="{{row.id}}"/>
+								<input id="bgDailyCustomerList{{idx}}_delFlag" name="bgDailyCustomerList[{{idx}}].delFlag" type="hidden" value="0"/>
+							</td>
+							<td>
+								<textarea id="bgDailyCustomerList{{idx}}_customerRemark" name="bgDailyCustomerList[{{idx}}].customerRemark" rows="4" style="width:90%;"  maxlength="255" class="input-small ">{{row.customerRemark}}</textarea>
+							</td>
+							
+							<shiro:hasPermission name="bg:bgDaily:edit"><td class="text-center" width="10">
+								{{#delBtn}}<span class="close" onclick="delRow(this, '#bgDailyCustomerList{{idx}}')" title="删除">&times;</span>{{/delBtn}}
+							</td></shiro:hasPermission>
+						</tr>//-->
+					</script>
+					
+					
+					<script type="text/javascript">
+						var bgDailyCustomerRowIdx = 0, bgDailyCustomerTpl = $("#bgDailyCustomerTpl").html().replace(/(\/\/\<!\-\-)|(\/\/\-\->)/g,"");
+						$(document).ready(function() {
+							var data = ${fns:toJson(bgDaily.bgDailyCustomerList)};
+							for (var i=0; i<data.length; i++){
+								addRow('#bgDailyCustomerList', bgDailyCustomerRowIdx, bgDailyCustomerTpl, data[i]);
+								bgDailyCustomerRowIdx = bgDailyCustomerRowIdx + 1;
+							}
+						});
+					</script>
+					
+				</div>
+			</div>
+		
 		
 		
 		

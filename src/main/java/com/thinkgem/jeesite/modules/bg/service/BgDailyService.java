@@ -13,9 +13,11 @@ import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.bg.dao.BgDailyContacterDao;
+import com.thinkgem.jeesite.modules.bg.dao.BgDailyCustomerDao;
 import com.thinkgem.jeesite.modules.bg.dao.BgDailyDao;
 import com.thinkgem.jeesite.modules.bg.entity.BgDaily;
 import com.thinkgem.jeesite.modules.bg.entity.BgDailyContacter;
+import com.thinkgem.jeesite.modules.bg.entity.BgDailyCustomer;
 
 /**
  * 日报生成Service
@@ -27,11 +29,23 @@ import com.thinkgem.jeesite.modules.bg.entity.BgDailyContacter;
 public class BgDailyService extends CrudService<BgDailyDao, BgDaily> {
 	@Autowired
 	private BgDailyContacterDao bgDailyContacterDao;
+	
+	@Autowired
+	private BgDailyCustomerDao bgDailyCustomerDao;
 
 	public BgDaily get(String id) {
 		BgDaily bgDaily = super.get(id);
 		bgDaily.setBgDailyContacterList(findContacters(bgDaily));
+		
+		bgDaily.setBgDailyCustomerList(findCustomers(bgDaily));
 		return bgDaily;
+	}
+
+	private List<BgDailyCustomer> findCustomers(BgDaily bgDaily) {
+		BgDailyCustomer bgDailyContacter =new BgDailyCustomer();
+		bgDailyContacter.setHid(bgDaily.getId());
+		return bgDailyCustomerDao.findList(bgDailyContacter);
+	
 	}
 
 	private List<BgDailyContacter> findContacters(BgDaily bgDaily) {
@@ -70,7 +84,22 @@ public class BgDailyService extends CrudService<BgDailyDao, BgDaily> {
 				}
 			}
 		}
-		
+		if(bgDaily.getBgDailyCustomerList()!=null){
+			for (BgDailyCustomer c : bgDaily.getBgDailyCustomerList()) {
+				c.setHid(bgDaily.getId());
+				if (BgDailyContacter.DEL_FLAG_NORMAL.equals(c.getDelFlag())) {
+					if (StringUtils.isBlank(c.getId())) {
+						c.preInsert();
+						bgDailyCustomerDao.insert(c);
+					} else {
+						c.preUpdate();
+						bgDailyCustomerDao.update(c);
+					}
+				} else {
+					bgDailyCustomerDao.delete(c);
+				}
+			}
+		}
 
 	}
 
