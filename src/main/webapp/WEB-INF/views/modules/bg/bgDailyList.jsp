@@ -48,6 +48,9 @@
 				<form:input path="bgDailyContacterList[0].mobileNumber" htmlEscape="false" maxlength="1000" class="input-medium"/>
 			</li>
 			<li>
+			<label style="width: 120px;">代理事项：</label>
+				<form:input path="agentJob" htmlEscape="false" maxlength="1000" class="input-medium"/>
+			
 			</li>
 			<li class="btns"></li>
 			<li class="clearfix"></li>

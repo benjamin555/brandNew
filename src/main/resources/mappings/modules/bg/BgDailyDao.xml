@@ -14,6 +14,7 @@
 		a.today_remark AS "todayRemark",
 		a.tomorrow_plan AS "tomorrowPlan"
 		,u.name as "createBy.name"
+		,a.agent_job as "agentJob"
 	</sql>
 	
 	<sql id="bgDailyJoins">
@@ -55,6 +56,13 @@
 					<if test="dbName == 'mssql'">'%'+#{tomorrowPlan}+'%'</if>
 					<if test="dbName == 'mysql'">concat('%',#{tomorrowPlan},'%')</if>
 			</if>
+			
+			<if test="agentJob != null and agentJob != ''">
+				AND a.agent_job LIKE 
+					<if test="dbName == 'mysql'">concat('%',#{agentJob},'%')</if>
+			</if>
+			
+			
 			
 			<if test="bgDailyContacterList != null and bgDailyContacterList.size>0  ">
 				<if test="bgDailyContacterList[0].mobileNumber!=''">
@@ -106,6 +114,7 @@
 			ri_date,
 			today_remark,
 			tomorrow_plan
+			,agent_job
 		) VALUES (
 			#{createBy.id},
 			#{createDate},
@@ -117,6 +126,7 @@
 			#{riDate},
 			#{todayRemark},
 			#{tomorrowPlan}
+			,#{agentJob}
 		)
 	</insert>
 	
@@ -128,6 +138,7 @@
 			ri_date = #{riDate},
 			today_remark = #{todayRemark},
 			tomorrow_plan = #{tomorrowPlan}
+			,agent_job=#{agentJob}
 		WHERE id = #{id}
 	</update>
 	
