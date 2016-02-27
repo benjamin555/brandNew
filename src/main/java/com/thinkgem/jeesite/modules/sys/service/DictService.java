@@ -30,7 +30,7 @@ public class DictService extends CrudService<DictDao, Dict> {
 	public List<String> findTypeList(){
 		return dao.findTypeList(new Dict());
 	}
-
+	@Transactional(readOnly = false)
 	@Override
 	public void save(Dict dict) {
 		super.save(dict);

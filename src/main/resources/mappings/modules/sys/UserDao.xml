@@ -201,6 +201,18 @@
 		ORDER BY a.name
 	</select>
 	
+	
+	<!-- 根据OfficeCode获取用户（树查询用户时用） -->
+	<select id="findUserByOfficeCode" resultType="User" useCache="true">
+		SELECT
+			a.id, a.name, a.login_name
+		FROM sys_user a
+		join sys_office o on a.office_id = o.id
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+			AND o.code = #{office.code}
+		ORDER BY a.name
+	</select>
+	
 	<!-- 查询全部用户 -->
 	<select id="findAllList" resultType="User">
 		SELECT

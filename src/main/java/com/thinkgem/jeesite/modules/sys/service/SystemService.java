@@ -126,6 +126,22 @@ public class SystemService extends BaseService implements InitializingBean {
 		return list;
 	}
 	
+	
+	/**
+	 * 通过部门code，仅返回用户id和name（树查询用户时用）
+	 * @param user
+	 * @return
+	 */
+	public List<User> findUserByOfficeCode(String code) {
+		List<User> list =null;
+		User user = new User();
+		Office office = new Office();
+		office.setCode(code);
+		user.setOffice(office);
+		list = userDao.findUserByOfficeCode(user);
+		return list;
+	}
+	
 	@Transactional(readOnly = false)
 	public void saveUser(User user) {
 		if (StringUtils.isBlank(user.getId())){

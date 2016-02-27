@@ -339,6 +339,22 @@ public class UserController extends BaseController {
 		}
 		return mapList;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "treeDataByCode")
+	public List<Map<String, Object>> treeDataByCode(@RequestParam(required=false) String officeCode, HttpServletResponse response) {
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		List<User> list = systemService.findUserByOfficeCode(officeCode);
+		for (int i=0; i<list.size(); i++){
+			User e = list.get(i);
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("id", "u_"+e.getId());
+			map.put("pId", officeCode);
+			map.put("name", StringUtils.replace(e.getName(), " ", ""));
+			mapList.add(map);
+		}
+		return mapList;
+	}
     
 //	@InitBinder
 //	public void initBinder(WebDataBinder b) {
