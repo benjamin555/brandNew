@@ -59,7 +59,12 @@ public class BgDailyService extends CrudService<BgDailyDao, BgDaily> {
 	}
 
 	public Page<BgDaily> findPage(Page<BgDaily> page, BgDaily bgDaily) {
-		return super.findPage(page, bgDaily);
+		Page<BgDaily> p = super.findPage(page, bgDaily);
+		List<BgDaily> list = p.getList();
+		for (BgDaily b : list) {
+			b.setBgDailyContacterList(findContacters(b));
+		}
+		return p;
 	}
 
 	@Transactional(readOnly = false)

@@ -65,6 +65,7 @@
 				<th>日期</th>
 				<th>意向客户及情况</th>
 				<th>明天重点客户及情况</th>
+				<th>联系方式</th>
 				<shiro:hasPermission name="bg:bgDaily:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>
@@ -82,6 +83,12 @@
 				</td>
 				<td>
 					${bgDaily.tomorrowPlan}
+				</td>
+				<td>
+					<c:forEach items="${bgDaily.bgDailyContacterList}" var="contacter">
+					 ${contacter.name}/${contacter.mobileNumber}
+					 </br>
+					</c:forEach>
 				</td>
 				<shiro:hasPermission name="bg:bgDaily:edit"><td>
     				<a href="${ctx}/bg/bgDaily/form?id=${bgDaily.id}">修改</a>
