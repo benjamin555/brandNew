@@ -17,10 +17,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thinkgem.jeesite.common.config.Global;
 import com.thinkgem.jeesite.common.persistence.Page;
-import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.common.utils.StringUtils;
+import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.jy.entity.JyCustomer;
 import com.thinkgem.jeesite.modules.jy.service.JyCustomerService;
+import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 
 /**
  * 客户进度Controller
@@ -46,11 +47,22 @@ public class JyCustomerController extends BaseController {
 		return entity;
 	}
 	
-	@RequiresPermissions("jy:jyCustomer:view")
-	@RequestMapping(value = {"list", ""})
+	@RequiresPermissions("jy:jyCustomer:superView")
+	@RequestMapping(value = {"list"})
 	public String list(JyCustomer jyCustomer, HttpServletRequest request, HttpServletResponse response, Model model) {
 		Page<JyCustomer> page = jyCustomerService.findPage(new Page<JyCustomer>(request, response), jyCustomer); 
 		model.addAttribute("page", page);
+		model.addAttribute("active","list");
+		return "modules/jy/jyCustomerList";
+	}
+	
+	@RequiresPermissions("jy:jyCustomer:view")
+	@RequestMapping(value = {"listSelf", ""})
+	public String listSelf(JyCustomer jyCustomer, HttpServletRequest request, HttpServletResponse response, Model model) {
+		jyCustomer.setCurrentFollower(UserUtils.getUser());
+		Page<JyCustomer> page = jyCustomerService.findPage(new Page<JyCustomer>(request, response), jyCustomer); 
+		model.addAttribute("page", page);
+		model.addAttribute("active","listSelf");
 		return "modules/jy/jyCustomerList";
 	}
 

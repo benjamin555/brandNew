@@ -18,7 +18,8 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="${ctx}/jy/jyCustomer/">客户进度列表</a></li>
+		<li class="${active eq 'listSelf'?'active':''}"><a href="${ctx}/jy/jyCustomer/listSelf">客户进度列表</a></li>
+		<shiro:hasPermission name="jy:jyCustomer:superView"><li class="${active eq 'list'?'active':''}"><a href="${ctx}/jy/jyCustomer/list">总客户进度列表</a></li></shiro:hasPermission>
 		<shiro:hasPermission name="jy:jyCustomer:edit"><li><a href="${ctx}/jy/jyCustomer/form">客户进度添加</a></li></shiro:hasPermission>
 	</ul>
 	<form:form id="searchForm" modelAttribute="jyCustomer" action="${ctx}/jy/jyCustomer/" method="post" class="breadcrumb form-search">
