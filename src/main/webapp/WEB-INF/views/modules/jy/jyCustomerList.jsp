@@ -22,10 +22,13 @@
 		<shiro:hasPermission name="jy:jyCustomer:superView"><li class="${active eq 'list'?'active':''}"><a href="${ctx}/jy/jyCustomer/list">总客户进度列表</a></li></shiro:hasPermission>
 		<shiro:hasPermission name="jy:jyCustomer:edit"><li><a href="${ctx}/jy/jyCustomer/form">客户进度添加</a></li></shiro:hasPermission>
 	</ul>
-	<form:form id="searchForm" modelAttribute="jyCustomer" action="${ctx}/jy/jyCustomer/" method="post" class="breadcrumb form-search">
+	<form:form id="searchForm" modelAttribute="jyCustomer" action="${ctx}/jy/jyCustomer/${active}" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
+			<li><label>代理项目：</label>
+				<form:input path="agent" htmlEscape="false" class="input-medium"/>
+			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>

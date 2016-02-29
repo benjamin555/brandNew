@@ -41,6 +41,9 @@
 			<if test="currentFollower != null and currentFollower.id != ''">
 				AND a.current_follower_id = #{currentFollower.id}
 			</if>
+			<if test="agent != null and agent != ''">
+				AND a.agent like concat('%',#{agent},'%')
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">

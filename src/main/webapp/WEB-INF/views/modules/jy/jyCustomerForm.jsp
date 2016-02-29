@@ -104,7 +104,7 @@
 			<label class="control-label">当前跟进人：</label>
 			<div class="controls">
 			
-				<sys:treeselect id="currentFollowerId" name="currentFollowerId"  labelName="user.name" labelValue="${jyCustomer.currentFollower.name}"  value="${jyCustomer.currentFollower.id}"
+				<sys:treeselect id="currentFollowerId" name="currentFollower.id"  labelName="user.name" labelValue="${jyCustomer.currentFollower.name}"  value="${jyCustomer.currentFollower.id}"
 							title="当前跟进人" url="/sys/user/treeDataByCode?officeCode=1207550101" cssClass="required recipient" cssStyle="width:150px" 
 							allowClear="true" notAllowSelectParent="true" smallBtn="false"/>
 			
