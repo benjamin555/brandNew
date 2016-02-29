@@ -3,22 +3,25 @@
  */
 package com.thinkgem.jeesite.modules.jy.entity;
 
+import java.util.Date;
+
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.thinkgem.jeesite.common.persistence.DataEntity;
 import com.thinkgem.jeesite.modules.sys.entity.User;
 
 /**
- * 客户进度Entity
+ * 京远客户跟进Entity
  * @author sp
- * @version 2016-02-25
+ * @version 2016-02-28
  */
 public class JyCustomerFollow extends DataEntity<JyCustomerFollow> {
 	
 	private static final long serialVersionUID = 1L;
-	private String typ;		// 客户类型
+	private Date dat;		// 客户类型
 	private String followContent;		// 跟进内容
-	private User follower;		// 跟进人id
+	private User follower;		// 跟进人
 	private JyCustomer hid;		// hid 父类
 	
 	public JyCustomerFollow() {
@@ -33,15 +36,15 @@ public class JyCustomerFollow extends DataEntity<JyCustomerFollow> {
 		this.hid = hid;
 	}
 
-	@Length(min=1, max=32, message="客户类型长度必须介于 1 和 32 之间")
-	public String getTyp() {
-		return typ;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	public Date getDat() {
+		return dat;
 	}
 
-	public void setTyp(String typ) {
-		this.typ = typ;
+	public void setDat(Date dat) {
+		this.dat = dat;
 	}
-	
+
 	@Length(min=0, max=400, message="跟进内容长度必须介于 0 和 400 之间")
 	public String getFollowContent() {
 		return followContent;
@@ -59,7 +62,7 @@ public class JyCustomerFollow extends DataEntity<JyCustomerFollow> {
 	public void setFollower(User follower) {
 		this.follower = follower;
 	}
-
+	
 	@Length(min=0, max=64, message="hid长度必须介于 0 和 64 之间")
 	public JyCustomer getHid() {
 		return hid;

@@ -5,6 +5,8 @@
 	<title>客户进度管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
+		var username = '${fns:getUser().name}';
+		var userId = '${fns:getUser().id}';
 		$(document).ready(function() {
 			//$("#name").focus();
 			$("#inputForm").validate({
@@ -24,8 +26,15 @@
 			});
 		});
 		function addRow(list, idx, tpl, row){
+			if(!row){
+				row = {follower:{id:userId,name:username}}
+			}
+			var delBtn = true;
+			if(row.id){
+				delBtn =false;
+			}
 			$(list).append(Mustache.render(tpl, {
-				idx: idx, delBtn: true, row: row
+				idx: idx, delBtn: delBtn, row: row
 			}));
 			$(list+idx).find("select").each(function(){
 				$(this).val($(this).attr("data-value"));
@@ -92,7 +101,8 @@
 		<div class="control-group">
 			<label class="control-label">当前跟进人：</label>
 			<div class="controls">
-				<sys:treeselect id="currentFollowerId" name="currentFollowerId" value="currentFollowerId" labelName="user.name" labelValue="${currentFollowerId}" 
+			
+				<sys:treeselect id="currentFollowerId" name="currentFollowerId"  labelName="user.name" labelValue="${jyCustomer.currentFollower.name}"  value="${jyCustomer.currentFollower.id}"
 							title="当前跟进人" url="/sys/user/treeDataByCode?officeCode=1207550101" cssClass="required recipient" cssStyle="width:150px" 
 							allowClear="true" notAllowSelectParent="true" smallBtn="false"/>
 			
@@ -161,9 +171,9 @@
 							<tr>
 								<th class="hide"></th>
 								<th>备注</th>
-								<th>客户类型</th>
+								<th>跟进时间</th>
 								<th>跟进内容</th>
-								<th>跟进人id</th>
+								<th>跟进人</th>
 								<shiro:hasPermission name="jy:jyCustomer:edit"><th width="10">&nbsp;</th></shiro:hasPermission>
 							</tr>
 						</thead>
@@ -184,13 +194,15 @@
 								<textarea id="jyCustomerFollowList{{idx}}_remarks" name="jyCustomerFollowList[{{idx}}].remarks" rows="4" maxlength="255" class="input-small ">{{row.remarks}}</textarea>
 							</td>
 							<td>
-								<input id="jyCustomerFollowList{{idx}}_typ" name="jyCustomerFollowList[{{idx}}].typ" type="text" value="{{row.typ}}" maxlength="32" class="input-small required"/>
+								<input id="jyCustomerFollowList{{idx}}_dat" name="jyCustomerFollowList[{{idx}}].dat" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
+					value="{{row.dat}}"
+					onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
 							</td>
 							<td>
-								<input id="jyCustomerFollowList{{idx}}_followContent" name="jyCustomerFollowList[{{idx}}].followContent" type="text" value="{{row.followContent}}" maxlength="400" class="input-small "/>
+								<textarea id="jyCustomerFollowList{{idx}}_followContent" name="jyCustomerFollowList[{{idx}}].followContent" rows="4"  maxlength="400" class="input-small ">{{row.followContent}}</textarea>
 							</td>
 							<td>
-								<input id="jyCustomerFollowList{{idx}}_followerName" name="jyCustomerFollowList[{{idx}}].follower.Name" type="text" value="{{row.follower.name}}" maxlength="64" class="input-small "  readonly />
+								<input id="jyCustomerFollowList{{idx}}_followerName" name="jyCustomerFollowList[{{idx}}].follower.name" type="text" value="{{row.follower.name}}" maxlength="64" class="input-small "  readonly />
 							</td>
 							<shiro:hasPermission name="jy:jyCustomer:edit"><td class="text-center" width="10">
 								{{#delBtn}}<span class="close" onclick="delRow(this, '#jyCustomerFollowList{{idx}}')" title="删除">&times;</span>{{/delBtn}}

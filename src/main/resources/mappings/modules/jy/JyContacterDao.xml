@@ -12,7 +12,7 @@
 		a.id AS "id",
 		a.name AS "name",
 		a.phone_number AS "phoneNumber",
-		a.hid AS "hid",
+		a.hid AS "hid.id",
 		a.qqowx AS "qqowx"
 	</sql>
 	
@@ -41,8 +41,8 @@
 					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
 					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
 			</if>
-			<if test="hid != null and hid != ''">
-				AND a.hid = #{hid}
+			<if test="hid != null and hid.id != ''">
+				AND a.hid = #{hid.id}
 			</if>
 		</where>
 		<choose>
@@ -96,7 +96,7 @@
 			#{id},
 			#{name},
 			#{phoneNumber},
-			#{hid},
+			#{hid.id},
 			#{qqowx}
 		)
 	</insert>
@@ -108,7 +108,7 @@
 			remarks = #{remarks},
 			name = #{name},
 			phone_number = #{phoneNumber},
-			hid = #{hid},
+			hid = #{hid.id},
 			qqowx = #{qqowx}
 		WHERE id = #{id}
 	</update>
@@ -121,7 +121,7 @@
 				WHERE id = #{id}
 			</when>
 			<otherwise>
-				WHERE hid = #{hid}
+				WHERE hid = #{hid.id}
 			</otherwise>
 		</choose>
 	</update>

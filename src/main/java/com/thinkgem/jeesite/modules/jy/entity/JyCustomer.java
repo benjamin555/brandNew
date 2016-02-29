@@ -3,11 +3,13 @@
  */
 package com.thinkgem.jeesite.modules.jy.entity;
 
-import org.hibernate.validator.constraints.Length;
 import java.util.List;
-import com.google.common.collect.Lists;
 
+import org.hibernate.validator.constraints.Length;
+
+import com.google.common.collect.Lists;
 import com.thinkgem.jeesite.common.persistence.DataEntity;
+import com.thinkgem.jeesite.modules.sys.entity.User;
 
 /**
  * 客户进度Entity
@@ -20,7 +22,7 @@ public class JyCustomer extends DataEntity<JyCustomer> {
 	private String typ;		// 客户类型
 	private String agent;		// 代理项目
 	private String level;		// 客户级别
-	private String currentFollowerId;		// 当前跟进人
+	private User currentFollower;		// 当前跟进人
 	private List<JyContacter> jyContacterList = Lists.newArrayList();		// 子表列表
 	private List<JyCustomerFollow> jyCustomerFollowList = Lists.newArrayList();		// 子表列表
 	
@@ -59,15 +61,15 @@ public class JyCustomer extends DataEntity<JyCustomer> {
 		this.level = level;
 	}
 	
-	@Length(min=0, max=64, message="当前跟进人长度必须介于 0 和 64 之间")
-	public String getCurrentFollowerId() {
-		return currentFollowerId;
+	
+	public User getCurrentFollower() {
+		return currentFollower;
 	}
 
-	public void setCurrentFollowerId(String currentFollowerId) {
-		this.currentFollowerId = currentFollowerId;
+	public void setCurrentFollower(User currentFollower) {
+		this.currentFollower = currentFollower;
 	}
-	
+
 	public List<JyContacter> getJyContacterList() {
 		return jyContacterList;
 	}

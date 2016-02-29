@@ -13,10 +13,14 @@
 		a.typ AS "typ",
 		a.agent AS "agent",
 		a.level AS "level",
-		a.current_follower_id AS "currentFollowerId"
+		a.current_follower_id AS "currentFollower.id"
+		
+		,u.name AS "currentFollower.name"
+		
 	</sql>
 	
 	<sql id="jyCustomerJoins">
+	 left join sys_user u on u.id = a.current_follower_id
 	</sql>
     
 	<select id="get" resultType="JyCustomer">
@@ -87,7 +91,7 @@
 			#{typ},
 			#{agent},
 			#{level},
-			#{currentFollowerId}
+			#{currentFollower.id}
 		)
 	</insert>
 	
@@ -99,7 +103,7 @@
 			typ = #{typ},
 			agent = #{agent},
 			level = #{level},
-			current_follower_id = #{currentFollowerId}
+			current_follower_id = #{currentFollower.id}
 		WHERE id = #{id}
 	</update>
 	
