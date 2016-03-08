@@ -12,12 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
 import com.thinkgem.jeesite.common.utils.StringUtils;
-import com.thinkgem.jeesite.modules.jy.entity.JyCustomer;
-import com.thinkgem.jeesite.modules.jy.dao.JyCustomerDao;
-import com.thinkgem.jeesite.modules.jy.entity.JyContacter;
 import com.thinkgem.jeesite.modules.jy.dao.JyContacterDao;
-import com.thinkgem.jeesite.modules.jy.entity.JyCustomerFollow;
+import com.thinkgem.jeesite.modules.jy.dao.JyCustomerDao;
 import com.thinkgem.jeesite.modules.jy.dao.JyCustomerFollowDao;
+import com.thinkgem.jeesite.modules.jy.entity.JyContacter;
+import com.thinkgem.jeesite.modules.jy.entity.JyCustomer;
+import com.thinkgem.jeesite.modules.jy.entity.JyCustomerFollow;
 
 /**
  * 客户进度Service
@@ -45,7 +45,14 @@ public class JyCustomerService extends CrudService<JyCustomerDao, JyCustomer> {
 	}
 	
 	public Page<JyCustomer> findPage(Page<JyCustomer> page, JyCustomer jyCustomer) {
-		return super.findPage(page, jyCustomer);
+		Page<JyCustomer> p = super.findPage(page, jyCustomer);
+		List<JyCustomer> list = p.getList();
+		for (JyCustomer jyCustomer2 : list) {
+			jyCustomer2.setJyContacterList(jyContacterDao.findList(new JyContacter(jyCustomer2)));
+			jyCustomer2.setJyCustomerFollowList(jyCustomerFollowDao.findList(new JyCustomerFollow(jyCustomer2)));
+
+		}
+		return p;
 	}
 	
 	@Transactional(readOnly = false)

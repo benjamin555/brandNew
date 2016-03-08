@@ -18,9 +18,9 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li class="${active eq 'listSelf'?'active':''}"><a href="${ctx}/jy/jyCustomer/listSelf">客户进度列表</a></li>
-		<shiro:hasPermission name="jy:jyCustomer:superView"><li class="${active eq 'list'?'active':''}"><a href="${ctx}/jy/jyCustomer/list">总客户进度列表</a></li></shiro:hasPermission>
-		<shiro:hasPermission name="jy:jyCustomer:edit"><li><a href="${ctx}/jy/jyCustomer/form">客户进度添加</a></li></shiro:hasPermission>
+		<li class="${active eq 'listSelf'?'active':''}"><a href="${ctx}/jy/jyCustomer/listSelf">客户列表</a></li>
+		<shiro:hasPermission name="jy:jyCustomer:superView"><li class="${active eq 'list'?'active':''}"><a href="${ctx}/jy/jyCustomer/list">总客户列表</a></li></shiro:hasPermission>
+		<shiro:hasPermission name="jy:jyCustomer:edit"><li><a href="${ctx}/jy/jyCustomer/form">客户添加</a></li></shiro:hasPermission>
 	</ul>
 	<form:form id="searchForm" modelAttribute="jyCustomer" action="${ctx}/jy/jyCustomer/${active}" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
@@ -38,6 +38,8 @@
 		<thead>
 			<tr>
 				<th>更新时间</th>
+				<th>客户名称</th>
+				<th>最新进度</th>
 				<th>备注</th>
 				<shiro:hasPermission name="jy:jyCustomer:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
@@ -48,6 +50,13 @@
 				<td><a href="${ctx}/jy/jyCustomer/form?id=${jyCustomer.id}">
 					<fmt:formatDate value="${jyCustomer.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</a></td>
+				<td>
+					${jyCustomer.contacters}
+				</td>
+				<td>
+					${jyCustomer.lastFollowDesc}
+				</td>
+				
 				<td>
 					${jyCustomer.remarks}
 				</td>

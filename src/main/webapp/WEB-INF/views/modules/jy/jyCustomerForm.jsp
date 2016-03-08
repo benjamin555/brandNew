@@ -67,10 +67,10 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li class="${active eq 'listSelf'?'active':''}"><a href="${ctx}/jy/jyCustomer/listSelf">客户进度列表</a></li>
-		<shiro:hasPermission name="jy:jyCustomer:superView"><li class="${active eq 'list'?'active':''}"><a href="${ctx}/jy/jyCustomer/list">总客户进度列表</a></li></shiro:hasPermission>
+		<li class="${active eq 'listSelf'?'active':''}"><a href="${ctx}/jy/jyCustomer/listSelf">客户列表</a></li>
+		<shiro:hasPermission name="jy:jyCustomer:superView"><li class="${active eq 'list'?'active':''}"><a href="${ctx}/jy/jyCustomer/list">总客户列表</a></li></shiro:hasPermission>
 	
-		<li class="active"><a href="${ctx}/jy/jyCustomer/form?id=${jyCustomer.id}">客户进度<shiro:hasPermission name="jy:jyCustomer:edit">${not empty jyCustomer.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="jy:jyCustomer:edit">查看</shiro:lacksPermission></a></li>
+		<li class="active"><a href="${ctx}/jy/jyCustomer/form?id=${jyCustomer.id}">客户<shiro:hasPermission name="jy:jyCustomer:edit">${not empty jyCustomer.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="jy:jyCustomer:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="jyCustomer" action="${ctx}/jy/jyCustomer/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
@@ -111,7 +111,7 @@
 			</div>
 		</div>
 			<div class="control-group">
-				<label class="control-label">京远联系人：</label>
+				<label class="control-label">客户联系人：</label>
 				<div class="controls">
 					<table id="contentTable" class="table table-striped table-bordered table-condensed">
 						<thead>
@@ -166,7 +166,7 @@
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label">京远客户跟进：</label>
+				<label class="control-label">跟进情况：</label>
 				<div class="controls">
 					<table id="contentTable" class="table table-striped table-bordered table-condensed">
 						<thead>

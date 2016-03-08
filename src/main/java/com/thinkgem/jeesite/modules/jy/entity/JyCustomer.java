@@ -3,8 +3,11 @@
  */
 package com.thinkgem.jeesite.modules.jy.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Length;
 
 import com.google.common.collect.Lists;
@@ -25,6 +28,11 @@ public class JyCustomer extends DataEntity<JyCustomer> {
 	private User currentFollower;		// 当前跟进人
 	private List<JyContacter> jyContacterList = Lists.newArrayList();		// 子表列表
 	private List<JyCustomerFollow> jyCustomerFollowList = Lists.newArrayList();		// 子表列表
+	
+//	//联系人描述
+//	private String contacters;
+//	//最后跟进内容
+//	private String lastFollwerDesc;
 	
 	public JyCustomer() {
 		super();
@@ -84,4 +92,36 @@ public class JyCustomer extends DataEntity<JyCustomer> {
 	public void setJyCustomerFollowList(List<JyCustomerFollow> jyCustomerFollowList) {
 		this.jyCustomerFollowList = jyCustomerFollowList;
 	}
+
+	/**
+	 * 联系人描述
+	 * @return
+	 */
+	public String getContacters() {
+		List<String> cList =  new ArrayList<String>();
+		if (CollectionUtils.isNotEmpty(getJyContacterList())) {
+			List<JyContacter> jyContacterList2 = getJyContacterList();
+			for (JyContacter jyContacter : jyContacterList2) {
+				cList.add(jyContacter.getName());
+			}
+		}
+		return StringUtils.join(cList);
+	}
+
+	/**
+	 * 最后根据内容
+	 * @param contacters
+	 * @return
+	 */
+	public String getLastFollowDesc() {
+		
+		if (CollectionUtils.isNotEmpty(jyCustomerFollowList)) {
+			return jyCustomerFollowList.get(0).getFollowContent();
+		}
+		
+		return null;
+	}
+
+	
+	
 }
