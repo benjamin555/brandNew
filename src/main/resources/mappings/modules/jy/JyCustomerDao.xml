@@ -44,6 +44,9 @@
 			<if test="agent != null and agent != ''">
 				AND a.agent like concat('%',#{agent},'%')
 			</if>
+			<if test="level != null and level != ''">
+				AND a.level = #{level}
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">

@@ -29,6 +29,13 @@
 			<li><label>代理项目：</label>
 				<form:input path="agent" htmlEscape="false" class="input-medium"/>
 			</li>
+			<li><label>客户级别：</label>
+				<form:select path="level" class="input-xlarge "  >
+					<form:option value=""></form:option>
+					<form:options items="${ fns:getDictList('jy_follwer_level') }" itemLabel="label" itemValue="value" />
+				</form:select>
+			</li>
+			
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>
