@@ -26,9 +26,15 @@
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
-			<li><label>代理项目：</label>
-				<form:input path="agent" htmlEscape="false" class="input-medium"/>
+			<c:if test="${ active ne 'listSelf'}">
+			<li><label>当前根据人：</label>
+			<sys:treeselect id="currentFollowerId" name="currentFollower.id"  labelName="user.name" labelValue="${jyCustomer.currentFollower.name}"  value="${jyCustomer.currentFollower.id}"
+							title="当前跟进人" url="/sys/user/treeDataByCode?officeCode=1207550101" cssClass="required recipient" cssStyle="width:150px" 
+							allowClear="true" notAllowSelectParent="true" smallBtn="false"/>
+			
 			</li>
+			
+			</c:if>
 			<li><label>客户级别：</label>
 				<form:select path="level" class="input-xlarge "  >
 					<form:option value=""></form:option>
@@ -69,7 +75,9 @@
 				</td>
 				<shiro:hasPermission name="jy:jyCustomer:edit"><td>
     				<a href="${ctx}/jy/jyCustomer/form?id=${jyCustomer.id}">修改</a>
+    				<c:if test="${ active ne 'listSelf'}">
 					<a href="${ctx}/jy/jyCustomer/delete?id=${jyCustomer.id}" onclick="return confirmx('确认要删除该客户进度吗？', this.href)">删除</a>
+					</c:if>
 				</td></shiro:hasPermission>
 			</tr>
 		</c:forEach>
