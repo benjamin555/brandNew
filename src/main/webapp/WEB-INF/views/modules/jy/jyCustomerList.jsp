@@ -27,7 +27,7 @@
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
 			<c:if test="${ active ne 'listSelf'}">
-			<li><label>当前根据人：</label>
+			<li><label>当前跟进人：</label>
 			<sys:treeselect id="currentFollowerId" name="currentFollower.id"  labelName="user.name" labelValue="${jyCustomer.currentFollower.name}"  value="${jyCustomer.currentFollower.id}"
 							title="当前跟进人" url="/sys/user/treeDataByCode?officeCode=1207550101" cssClass="required recipient" cssStyle="width:150px" 
 							allowClear="true" notAllowSelectParent="true" smallBtn="false"/>
