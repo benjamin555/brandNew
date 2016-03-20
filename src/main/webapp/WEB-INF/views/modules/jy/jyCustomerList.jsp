@@ -26,6 +26,22 @@
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
+			<li><label>公司名：</label>
+			<form:input path="jyContacterList[0].remarks"  />			
+			</li>
+			
+			<li><label>联系人：</label>
+							<form:input path="jyContacterList[0].name"  />			
+
+			</li>
+			
+			<li><label>电话：</label>
+							<form:input path="jyContacterList[0].phoneNumber"  />			
+
+			</li>
+		</ul>
+		
+		<ul class="ul-form">
 			<c:if test="${ active ne 'listSelf'}">
 			<li><label>当前跟进人：</label>
 			<sys:treeselect id="currentFollowerId" name="currentFollower.id"  labelName="user.name" labelValue="${jyCustomer.currentFollower.name}"  value="${jyCustomer.currentFollower.id}"
@@ -51,7 +67,8 @@
 		<thead>
 			<tr>
 				<th>更新时间</th>
-				<th>客户名称</th>
+				<th>公司名称</th>
+				<th>联系人</th>
 				<th>最新进度</th>
 				<th>备注</th>
 				<shiro:hasPermission name="jy:jyCustomer:edit"><th>操作</th></shiro:hasPermission>
@@ -64,8 +81,12 @@
 					<fmt:formatDate value="${jyCustomer.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</a></td>
 				<td>
+					${jyCustomer.companyName}
+				</td>
+				<td>
 					${jyCustomer.contacters}
 				</td>
+				
 				<td>
 					${jyCustomer.lastFollowDesc}
 				</td>

@@ -122,6 +122,17 @@ public class JyCustomer extends DataEntity<JyCustomer> {
 		return null;
 	}
 
+	public String getCompanyName(){
+		if (CollectionUtils.isNotEmpty(jyContacterList)) {
+			List<String> cs = new ArrayList<String>();
+			for (JyContacter c : jyContacterList) {
+				cs.add(c.getRemarks());
+			}
+			return StringUtils.join(cs);
+		}
+		return null;
+	}
+	
 	
 	
 }

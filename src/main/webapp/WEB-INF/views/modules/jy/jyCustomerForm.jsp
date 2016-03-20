@@ -117,8 +117,8 @@
 						<thead>
 							<tr>
 								<th class="hide"></th>
-								<th>备注</th>
-								<th>名称</th>
+								<th>公司名</th>
+								<th>联系人</th>
 								<th>电话号码</th>
 								<th>QQ或微信</th>
 								<shiro:hasPermission name="jy:jyCustomer:edit"><th width="10">&nbsp;</th></shiro:hasPermission>

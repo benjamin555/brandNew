@@ -3,6 +3,7 @@
 <mapper namespace="com.thinkgem.jeesite.modules.jy.dao.JyCustomerDao">
     
 	<sql id="jyCustomerColumns">
+	    distinct
 		a.create_by AS "createBy.id",
 		a.create_date AS "createDate",
 		a.update_by AS "updateBy.id",
@@ -21,6 +22,7 @@
 	
 	<sql id="jyCustomerJoins">
 	 left join sys_user u on u.id = a.current_follower_id
+	 left join jy_contacter c on c.hid = a.id
 	</sql>
     
 	<select id="get" resultType="JyCustomer">
@@ -47,6 +49,20 @@
 			<if test="level != null and level != ''">
 				AND a.level = #{level}
 			</if>
+			
+			<if test="jyContacterList != null and jyContacterList.size>0">
+				<if test="jyContacterList[0].remarks!=''">
+				AND c.remarks  LIKE concat('%',#{jyContacterList[0].remarks},'%')
+				</if>
+				<if test="jyContacterList[0].name!=''">
+				AND c.name LIKE concat('%',#{jyContacterList[0].name},'%')
+				</if>
+				<if test="jyContacterList[0].phoneNumber!=''">
+				AND c.phone_number LIKE concat('%',#{jyContacterList[0].phoneNumber},'%')
+				</if>
+				
+			</if>
+			
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
