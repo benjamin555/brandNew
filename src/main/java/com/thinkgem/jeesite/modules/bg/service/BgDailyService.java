@@ -63,6 +63,8 @@ public class BgDailyService extends CrudService<BgDailyDao, BgDaily> {
 		List<BgDaily> list = p.getList();
 		for (BgDaily b : list) {
 			b.setBgDailyContacterList(findContacters(b));
+			b.setBgDailyCustomerList(findCustomers(b));
+			
 		}
 		return p;
 	}

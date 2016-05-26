@@ -63,7 +63,7 @@
 			<tr>
 				<th>更新时间</th>
 				<th>日期</th>
-				<th>意向客户及情况</th>
+				<th>意向客户情况</th>
 				<th>明天重点客户及情况</th>
 				<th>联系方式</th>
 				<shiro:hasPermission name="bg:bgDaily:edit"><th>操作</th></shiro:hasPermission>
@@ -79,7 +79,7 @@
 					<fmt:formatDate value="${bgDaily.riDate}" pattern="yyyy-MM-dd"/>
 				</td>
 				<td>
-					${bgDaily.todayRemark}
+				   ${not empty bgDaily.bgDailyCustomerList ?bgDaily.bgDailyCustomerList[0].customerRemark:''}
 				</td>
 				<td>
 					${bgDaily.tomorrowPlan}
