@@ -37,13 +37,16 @@ public class BgDailyService extends CrudService<BgDailyDao, BgDaily> {
 		BgDaily bgDaily = super.get(id);
 		bgDaily.setBgDailyContacterList(findContacters(bgDaily));
 		
-		bgDaily.setBgDailyCustomerList(findCustomers(bgDaily));
+		bgDaily.setBgDailyCustomerList(findCustomers(bgDaily,"create_date"));
 		return bgDaily;
 	}
 
-	private List<BgDailyCustomer> findCustomers(BgDaily bgDaily) {
+	private List<BgDailyCustomer> findCustomers(BgDaily bgDaily,String sortBy) {
 		BgDailyCustomer bgDailyContacter =new BgDailyCustomer();
 		bgDailyContacter.setHid(bgDaily.getId());
+		Page<BgDailyCustomer> p = new Page<BgDailyCustomer>();
+		p.setOrderBy(sortBy);
+		bgDailyContacter.setPage(p );
 		return bgDailyCustomerDao.findList(bgDailyContacter);
 	
 	}
@@ -63,7 +66,7 @@ public class BgDailyService extends CrudService<BgDailyDao, BgDaily> {
 		List<BgDaily> list = p.getList();
 		for (BgDaily b : list) {
 			b.setBgDailyContacterList(findContacters(b));
-			b.setBgDailyCustomerList(findCustomers(b));
+			b.setBgDailyCustomerList(findCustomers(b,"create_date desc"));
 			
 		}
 		return p;
