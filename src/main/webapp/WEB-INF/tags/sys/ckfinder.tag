@@ -25,6 +25,7 @@
 		}//<c:if test="${selectMultiple}">
 		$("#${input}").val($("#${input}").val()+($("#${input}").val(url)==""?url:"|"+url));//</c:if><c:if test="${!selectMultiple}">
 		$("#${input}").val(url);//</c:if>
+		console.info(url);
 		${input}Preview();
 		//top.$.jBox.close();
 	}
@@ -36,6 +37,7 @@
 		}//<c:if test="${selectMultiple}">
 		$("#${input}").val($("#${input}").val()+($("#${input}").val(url)==""?url:"|"+url));//</c:if><c:if test="${!selectMultiple}">
 		$("#${input}").val(url);//</c:if>
+		console.info(url);
 		${input}Preview();
 		//top.$.jBox.close();
 	}

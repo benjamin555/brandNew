@@ -14,5 +14,6 @@ CKFinder.customConfig = function( config )
 	config.language = 'zh-cn';
 	config.removePlugins = 'basket,help';
 	config.defaultSortBy = 'date';
-	
+	config.Images.maxWidth=1600;
+	config.Images.maxHeight=3200;
 };
