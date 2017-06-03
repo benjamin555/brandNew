@@ -6,6 +6,13 @@
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			var isAdmin = false;
+			<shiro:hasRole name="a">
+				isAdmin = true;
+			</shiro:hasRole>
+			if(!isAdmin){
+				$(document).prohibitRight().prohibitCopy();
+			}
 			
 		});
 		function page(n,s){
@@ -17,6 +24,7 @@
 	</script>
 </head>
 <body>
+
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="${ctx}/bg/bgExpress/">快件列表</a></li>
 		<shiro:hasPermission name="bg:bgExpress:edit"><li><a href="${ctx}/bg/bgExpress/form">快件添加</a></li></shiro:hasPermission>

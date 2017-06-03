@@ -1,4 +1,4 @@
-function disableCopy(){
+/*function disableCopy(){
 	$("body ")
 	.attr("onselectstart","return false;")
 	.attr("ondragstart","return false;")
@@ -6,4 +6,27 @@ function disableCopy(){
 	.attr("oncopy","document.selection.empty();")
 	.attr("onselect","document.selection.empty();")
 ;
-}
+	
+}*/
+/**
+ * 禁用复制
+ */
+$.fn.extend({
+	prohibitRight:function(){
+		$(this).on("contextmenu",function () {
+            return false;
+        });
+		return this;
+	}
+	,prohibitCopy:function(){
+		$(this).on("copy",function () {
+            return false;
+        });
+		
+		$(this).on("keydown",function () {
+            return false;
+        });
+		return this;
+	}
+});
+

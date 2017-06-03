@@ -5,7 +5,18 @@
 	<title>快件管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
+	
+	
+	
 		$(document).ready(function() {
+			
+			var isAdmin = false;
+			<shiro:hasRole name="a">
+				isAdmin = true;
+			</shiro:hasRole>
+			if(!isAdmin){
+				$(document).prohibitRight().prohibitCopy();
+			}
 			//$("#name").focus();
 			$("#inputForm").validate({
 				submitHandler: function(form){

@@ -23,6 +23,5 @@
 <script src="${ctxStatic}/common/bg.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
-	//disableCopy();
 });
 </script>
