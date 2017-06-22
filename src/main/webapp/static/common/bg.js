@@ -22,9 +22,14 @@ $.fn.extend({
 		$(this).on("copy",function () {
             return false;
         });
-		
-		$(this).on("keydown",function () {
-            return false;
+		$(this).on("keydown",function (e) {
+			if(e.which == "22"){ 
+			// press Ctrl+V keyboard 
+				 return false;
+			}else{
+				return true;
+			}
+           
         });
 		return this;
 	}
