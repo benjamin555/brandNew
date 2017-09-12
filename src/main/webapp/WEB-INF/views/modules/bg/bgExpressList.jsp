@@ -50,6 +50,9 @@
 			<li><label>情况：</label>
 				<form:input path="status" htmlEscape="false" maxlength="64" class="input-medium"/>
 			</li>
+			<li><label>备注：</label>
+				<form:input path="remarks" htmlEscape="false"  class="input-medium"/>
+			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>

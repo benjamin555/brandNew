@@ -87,9 +87,12 @@
 			<if test="certificateDate != null and certificateDate != ''">
 				AND a.certificate_date = #{certificateDate}
 			</if>
+			<if test="remarks != null and remarks != ''">
+				AND a.remarks like concat('%',#{remarks},'%')
+			</if>
 			<if test="contacter != null">
 			<if test="contacter.name != null and contacter.name != ''">
-				AND c.name = #{contacter.name}
+				AND c.name  like concat('%',#{contacter.name},'%')
 			</if>
 			</if>
 		</where>

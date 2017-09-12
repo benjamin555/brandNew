@@ -73,6 +73,9 @@
 					value="<fmt:formatDate value="${bgCase.certificateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
 					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
 			</li>
+			<li><label>备注：</label>
+				<form:input path="remarks" htmlEscape="false"  class="input-medium"/>
+			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/>
 			<input  class="btn btn-primary" type="button" onclick="resetForm();" value="重置"/>
 			</li>

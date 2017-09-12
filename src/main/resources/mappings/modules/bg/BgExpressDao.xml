@@ -54,10 +54,13 @@
 					<if test="dbName == 'mysql'">concat('%',#{address},'%')</if>
 			</if>
 			<if test="phoneNumber != null and phoneNumber != ''">
-				AND a.phone_number = #{phoneNumber}
+				AND a.phone_number like concat('%',#{phoneNumber},'%')
 			</if>
 			<if test="status != null and status != ''">
 				AND a.status = #{status}
+			</if>
+			<if test="remarks != null and remarks != ''">
+				AND a.remarks like concat('%',#{remarks},'%')
 			</if>
 		</where>
 		<choose>
