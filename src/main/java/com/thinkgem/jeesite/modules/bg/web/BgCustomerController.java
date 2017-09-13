@@ -54,6 +54,10 @@ public class BgCustomerController extends BaseController {
 	@RequiresPermissions("bg:bgCustomer:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(BgCustomer bgCustomer, HttpServletRequest request, HttpServletResponse response, Model model) {
+		String name = request.getParameter("bgCustomer.name");
+		if(StringUtils.isNotBlank(name)){
+			bgCustomer.setName(name);
+		}
 		Page<BgCustomer> page = bgCustomerService.findPage(new Page<BgCustomer>(request, response), bgCustomer); 
 		model.addAttribute("page", page);
 		return "modules/bg/bgCustomerList";

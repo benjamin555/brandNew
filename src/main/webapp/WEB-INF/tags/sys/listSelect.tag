@@ -33,7 +33,13 @@
 			return true;
 		}
 		// 正常打开	
-		top.$.jBox.open("iframe:${ctx}${url}?select=true", "选择${title}", 500, 400, {
+		var url= "${ctx}${url}";
+		if(url.indexOf("?")>0){
+			url+="&select=true";
+		}else{
+			url+="?select=true";
+		}
+		top.$.jBox.open("iframe:"+url, "选择${title}", 500, 400, {
 			ajaxData:{selectIds: $("#${id}Id").val()},buttons:{"确定":"ok", ${allowClear?"\"清除\":\"clear\", ":""}"关闭":true}, submit:function(v, h, f){
 				if (v=="ok"){
 					var radio = h.find("iframe").contents().find(":radio[checked]");

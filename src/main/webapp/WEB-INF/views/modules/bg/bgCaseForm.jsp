@@ -99,7 +99,7 @@
 			<label class="control-label">客户：</label>
 			<div class="controls">
 <sys:listSelect id="customer" name="customerId" value="${bgCase.customerId }" labelName="customer" labelValue="${bgCase.customer.name}"
-					title="客户" url="/bg/bgCustomer/list" cssClass="required"/>			</div>
+					title="客户" url="/bg/bgCustomer/list?bgCustomer.name=${bgCase.customer.name}" cssClass="required"/>			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">提成月份：</label>
