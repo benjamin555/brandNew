@@ -7,7 +7,13 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			
-			
+			var isAdmin = false;
+			<shiro:hasRole name="a">
+				isAdmin = true;
+			</shiro:hasRole>
+			if(!isAdmin){
+				$(document).prohibitRight().prohibitCopy();
+			}
 			
 		});
 		function resetForm(){
