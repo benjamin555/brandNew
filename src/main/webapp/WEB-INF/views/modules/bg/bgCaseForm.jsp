@@ -2,9 +2,18 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>单表管理</title>
+	<title>案件管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
+		function openDetail(url){
+		top.$.jBox.open("iframe:"+url, "选择${title}", 1000, 500, {buttons:{"确定":"ok"}, submit:function(v, h, f){
+				return true;
+			}, loaded:function(h){
+				$(".jbox-content", top.document).css("overflow-y","hidden");
+			}
+		});
+		
+		}
 		$(document).ready(function() {
 		
 			var isAdmin = false;
@@ -35,8 +44,8 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/bg/bgCase/">单表列表</a></li>
-		<li class="active"><a href="${ctx}/bg/bgCase/form?id=${bgCase.id}">单表<shiro:hasPermission name="bg:bgCase:edit">${not empty bgCase.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="bg:bgCase:edit">查看</shiro:lacksPermission></a></li>
+		<li><a href="${ctx}/bg/bgCase/">案件列表</a></li>
+		<li class="active"><a href="${ctx}/bg/bgCase/form?id=${bgCase.id}">案件<shiro:hasPermission name="bg:bgCase:edit">${not empty bgCase.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="bg:bgCase:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="bgCase" action="${ctx}/bg/bgCase/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
@@ -107,7 +116,11 @@
 			<label class="control-label">客户：</label>
 			<div class="controls">
 <sys:listSelect id="customer" name="customerId" value="${bgCase.customerId }" labelName="customer" labelValue="${bgCase.customer.name}"
-					title="客户" url="/bg/bgCustomer/list?bgCustomer.name=${bgCase.customer.name}" cssClass="required"/>			</div>
+					title="客户" url="/bg/bgCustomer/list?bgCustomer.name=${bgCase.customer.name}" cssClass="required"/>	
+					
+					<button class="btn-info" type="button" onclick="openDetail('${ctx}/bg/bgCustomer/detail?id=${bgCase.customerId }');">查看明细</button>	
+							</div>
+				
 		</div>
 		<div class="control-group">
 			<label class="control-label">提成月份：</label>

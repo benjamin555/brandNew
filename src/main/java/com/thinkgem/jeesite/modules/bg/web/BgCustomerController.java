@@ -69,6 +69,13 @@ public class BgCustomerController extends BaseController {
 		model.addAttribute("bgCustomer", bgCustomer);
 		return "modules/bg/bgCustomerForm";
 	}
+	
+	@RequiresPermissions("bg:bgCustomer:detail")
+	@RequestMapping(value = "detail")
+	public String detail(BgCustomer bgCustomer, Model model) {
+		model.addAttribute("bgCustomer", bgCustomer);
+		return "modules/bg/bgCustomerDetail";
+	}
 
 	@RequiresPermissions("bg:bgCustomer:edit")
 	@RequestMapping(value = "save")
