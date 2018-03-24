@@ -20,6 +20,7 @@
 	<sql id="bgDailyJoins">
 		join sys_user u on u.id = a.create_by
 		left join bg_daily_contacter d on d.hid = a.id
+		left join bg_daily_customer c on c.hid = a.id
 	</sql>
     
 	<select id="get" resultType="BgDaily">
@@ -45,10 +46,12 @@
 				AND a.ri_date = #{riDate}
 			</if>
 			<if test="todayRemark != null and todayRemark != ''">
-				AND a.today_remark LIKE 
+				AND (a.today_remark LIKE 
 					<if test="dbName == 'oracle'">'%'||#{todayRemark}||'%'</if>
 					<if test="dbName == 'mssql'">'%'+#{todayRemark}+'%'</if>
 					<if test="dbName == 'mysql'">concat('%',#{todayRemark},'%')</if>
+					or c.customer_Remark like concat('%',#{todayRemark},'%')
+					)
 			</if>
 			<if test="tomorrowPlan != null and tomorrowPlan != ''">
 				AND a.tomorrow_plan LIKE 
