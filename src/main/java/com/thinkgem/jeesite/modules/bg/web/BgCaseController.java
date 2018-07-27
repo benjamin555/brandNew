@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Transformer;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -82,9 +83,18 @@ public class BgCaseController extends BaseController {
 	@RequiresPermissions("bg:bgCase:view")
 	@RequestMapping(value = "form")
 	public String form(BgCase bgCase, Model model) {
+		bgCase.setBusinessManId(UserUtils.getUser().getName());
 		model.addAttribute("bgCase", bgCase);
 		return "modules/bg/bgCaseForm";
 	}
+	@RequiresPermissions("bg:bgCase:selfEdit")
+	@RequestMapping(value = "selfForm")
+	public String selfForm(BgCase bgCase, Model model) {
+		bgCase.setBusinessManId(UserUtils.getUser().getName());
+		model.addAttribute("bgCase", bgCase);
+		return "modules/bg/bgCaseSelfForm";
+	}
+
 
 	@RequiresPermissions("bg:bgCase:edit")
 	@RequestMapping(value = "save")
@@ -103,6 +113,41 @@ public class BgCaseController extends BaseController {
 		bgCaseService.delete(bgCase);
 		addMessage(redirectAttributes, "删除单表成功");
 		return "redirect:"+Global.getAdminPath()+"/bg/bgCase/?repage";
+	}
+
+	@RequiresPermissions("bg:bgCase:selfEdit")
+	@RequestMapping(value = {"self"})
+	public String self(BgCase bgCase, HttpServletRequest request, HttpServletResponse response, Model model) {
+
+		bgCase.setBusinessManId(UserUtils.getUser().getName());
+		Page<BgCase> page = bgCaseService.findPage(new Page<BgCase>(request, response), bgCase);
+		List<BgCase> list = page.getList();
+		for (BgCase bgCase2 : list) {
+			List<BgContacter> cs = bgCustomerService.findContacters(bgCase2.getCustomerId());
+			if (CollectionUtils.isNotEmpty(cs)) {
+				List<String> ls = (List<String>) CollectionUtils.collect(cs, new Transformer() {
+					@Override
+					public Object transform(Object input) {
+						return ((BgContacter)input).getName();
+					}
+				});
+				bgCase2.setContacters(org.apache.commons.lang3.StringUtils.join(ls));
+				logger.info("contacters:{}",bgCase2.getContacters());
+			}
+
+		}
+		model.addAttribute("page", page);
+		return "modules/bg/bgCaseSelfList";
+	}
+	@RequiresPermissions("bg:bgCase:selfEdit")
+	@RequestMapping(value = "selfSave")
+	public String selfSave(BgCase bgCase, Model model, RedirectAttributes redirectAttributes) {
+		if (!beanValidator(model, bgCase)){
+			return form(bgCase, model);
+		}
+		bgCaseService.save(bgCase);
+		addMessage(redirectAttributes, "保存单表成功");
+		return "redirect:"+Global.getAdminPath()+"/bg/bgCase/self?repage";
 	}
 
 }
