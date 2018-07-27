@@ -21,8 +21,10 @@
 <script src="${ctxStatic}/common/jeesite.min.js" type="text/javascript"></script>
 <script type="text/javascript">var ctx = '${ctx}', ctxStatic='${ctxStatic}';</script>
 <!-- 禁用复制 -->
-<script src="${ctxStatic}/common/bg.js?2.0" type="text/javascript"></script>
+<script src="${ctxStatic}/common/bg.js?2.1" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
+    $(".disableCopy").prohibitRight().prohibitCopy();
+
 });
 </script>

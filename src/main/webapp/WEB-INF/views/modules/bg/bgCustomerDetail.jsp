@@ -44,7 +44,7 @@
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="${ctx}/bg/bgCustomer/form?id=${bgCustomer.id}">客户<shiro:hasPermission name="bg:bgCustomer:edit">${not empty bgCustomer.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="bg:bgCustomer:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
-	<form:form id="inputForm" modelAttribute="bgCustomer" action="${ctx}/bg/bgCustomer/save" method="post" class="form-horizontal">
+	<form:form id="inputForm" modelAttribute="bgCustomer" action="${ctx}/bg/bgCustomer/save" method="post" class="form-horizontal disableCopy">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
 		<div class="control-group">
