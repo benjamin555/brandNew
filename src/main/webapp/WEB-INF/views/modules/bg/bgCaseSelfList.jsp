@@ -23,7 +23,7 @@
 <body >
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="${ctx}/bg/bgCase/self">单表列表</a></li>
-		<shiro:hasPermission name="bg:bgCase:edit"><li><a href="${ctx}/bg/bgCase/selfForm">单表添加</a></li></shiro:hasPermission>
+		<li><a href="${ctx}/bg/bgCase/selfForm">单表添加</a></li>
 	</ul>
 	<form:form id="searchForm" modelAttribute="bgCase" action="${ctx}/bg/bgCase/self" method="post" class="breadcrumb form-search disableCopy">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
