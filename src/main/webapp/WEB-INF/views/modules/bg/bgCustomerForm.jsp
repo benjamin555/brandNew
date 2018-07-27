@@ -89,7 +89,9 @@
 								<th>手机号码</th>
 								<th>固定电话号码</th>
 								<th>传真号码</th>
-								<shiro:hasPermission name="bg:bgCustomer:edit"><th width="10">&nbsp;</th></shiro:hasPermission>
+									<shiro:hasPermission name="bg:bgCustomer:edit">
+									<th width="10">&nbsp;</th>
+									</shiro:hasPermission>
 							</tr>
 						</thead>
 						<tbody id="bgContacterList">
@@ -119,17 +121,56 @@
 							<td>
 								<input id="bgContacterList{{idx}}_faxNumber" name="bgContacterList[{{idx}}].faxNumber" type="text" value="{{row.faxNumber}}" maxlength="20" class="input-small "/>
 							</td>
-							<shiro:hasPermission name="bg:bgCustomer:edit"><td class="text-center" width="10">
-								{{#delBtn}}<span class="close" onclick="delRow(this, '#bgContacterList{{idx}}')" title="删除">&times;</span>{{/delBtn}}
-							</td></shiro:hasPermission>
+
+							<shiro:hasPermission name="bg:bgCustomer:edit">
+									<td class="text-center" width="10">
+										{{#delBtn}}<span class="close" onclick="delRow(this, '#bgContacterList{{idx}}')" title="删除">&times;</span>{{/delBtn}}
+									</td>
+									</shiro:hasPermission>
+
+						</tr>//-->
+					</script>
+
+					<script type="text/template" id="bgContacterTplReadOnly">//<!--
+						<tr id="bgContacterList{{idx}}">
+							<td class="hide">
+								<input id="bgContacterList{{idx}}_id" name="bgContacterList[{{idx}}].id" type="hidden" value="{{row.id}}"/>
+								<input id="bgContacterList{{idx}}_delFlag" name="bgContacterList[{{idx}}].delFlag" type="hidden" value="0"/>
+							</td>
+							<td>
+								<textarea readonly id="bgContacterList{{idx}}_remarks" name="bgContacterList[{{idx}}].remarks" rows="4" maxlength="255" class="input-small readonly">{{row.remarks}}</textarea>
+							</td>
+							<td>
+								<input readonly id="bgContacterList{{idx}}_name" name="bgContacterList[{{idx}}].name" type="text" value="{{row.name}}" maxlength="64" class="input-small readonly"/>
+							</td>
+							<td>
+								<input readonly id="bgContacterList{{idx}}_mobileNumber" name="bgContacterList[{{idx}}].mobileNumber" type="text" value="{{row.mobileNumber}}" maxlength="20" class="input-small readonly"/>
+							</td>
+							<td>
+								<input readonly id="bgContacterList{{idx}}_fixedPhoneNumber" name="bgContacterList[{{idx}}].fixedPhoneNumber" type="text" value="{{row.fixedPhoneNumber}}" maxlength="20" class="input-small readonly"/>
+							</td>
+							<td>
+								<input readonly id="bgContacterList{{idx}}_faxNumber" name="bgContacterList[{{idx}}].faxNumber" type="text" value="{{row.faxNumber}}" maxlength="20" class="input-small "/>
+							</td>
+
+							<shiro:hasPermission name="bg:bgCustomer:edit">
+									<td class="text-center" width="10">
+									</td>
+									</shiro:hasPermission>
+
 						</tr>//-->
 					</script>
 					<script type="text/javascript">
 						var bgContacterRowIdx = 0, bgContacterTpl = $("#bgContacterTpl").html().replace(/(\/\/\<!\-\-)|(\/\/\-\->)/g,"");
+						var bgContacterTplReadOnly = $("#bgContacterTplReadOnly").html().replace(/(\/\/\<!\-\-)|(\/\/\-\->)/g,"")
 						$(document).ready(function() {
 							var data = ${fns:toJson(bgCustomer.bgContacterList)};
 							for (var i=0; i<data.length; i++){
-								addRow('#bgContacterList', bgContacterRowIdx, bgContacterTpl, data[i]);
+							    if(data[i].id){
+                                    addRow('#bgContacterList', bgContacterRowIdx, bgContacterTplReadOnly, data[i]);
+								}else{
+                                    addRow('#bgContacterList', bgContacterRowIdx, bgContacterTpl, data[i]);
+								}
 								bgContacterRowIdx = bgContacterRowIdx + 1;
 							}
 						});
