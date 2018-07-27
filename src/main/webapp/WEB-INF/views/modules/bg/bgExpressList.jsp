@@ -6,14 +6,7 @@
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			var isAdmin = false;
-			<shiro:hasRole name="a">
-				isAdmin = true;
-			</shiro:hasRole>
-			if(!isAdmin){
-				$(document).prohibitRight().prohibitCopy();
-			}
-			
+
 		});
 		function page(n,s){
 			$("#pageNo").val(n);
@@ -23,13 +16,13 @@
         }
 	</script>
 </head>
-<body>
+<body >
 
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="${ctx}/bg/bgExpress/">快件列表</a></li>
 		<shiro:hasPermission name="bg:bgExpress:edit"><li><a href="${ctx}/bg/bgExpress/form">快件添加</a></li></shiro:hasPermission>
 	</ul>
-	<form:form id="searchForm" modelAttribute="bgExpress" action="${ctx}/bg/bgExpress/" method="post" class="breadcrumb form-search">
+	<form:form id="searchForm" modelAttribute="bgExpress" action="${ctx}/bg/bgExpress/" method="post" class="breadcrumb form-search disableCopy">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
@@ -58,7 +51,7 @@
 		</ul>
 	</form:form>
 	<sys:message content="${message}"/>
-	<table id="contentTable" class="table table-striped table-bordered table-condensed">
+	<table id="contentTable" class="table table-striped table-bordered table-condensed disableCopy">
 		<thead>
 			<tr>
 				<th>更新时间</th>

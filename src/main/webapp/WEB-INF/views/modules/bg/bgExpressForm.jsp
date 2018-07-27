@@ -10,13 +10,6 @@
 	
 		$(document).ready(function() {
 			
-			var isAdmin = false;
-			<shiro:hasRole name="a">
-				isAdmin = true;
-			</shiro:hasRole>
-			if(!isAdmin){
-				$(document).prohibitRight().prohibitCopy();
-			}
 			//$("#name").focus();
 			$("#inputForm").validate({
 				submitHandler: function(form){
@@ -41,7 +34,7 @@
 		<li><a href="${ctx}/bg/bgExpress/">快件列表</a></li>
 		<li class="active"><a href="${ctx}/bg/bgExpress/form?id=${bgExpress.id}">快件<shiro:hasPermission name="bg:bgExpress:edit">${not empty bgExpress.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="bg:bgExpress:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
-	<form:form id="inputForm" modelAttribute="bgExpress" action="${ctx}/bg/bgExpress/save" method="post" class="form-horizontal">
+	<form:form id="inputForm" modelAttribute="bgExpress" action="${ctx}/bg/bgExpress/save" method="post" class="form-horizontal disableCopy">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
 		<div class="control-group">

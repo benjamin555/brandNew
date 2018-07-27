@@ -16,13 +16,6 @@
 		}
 		$(document).ready(function() {
 		
-			var isAdmin = false;
-			<shiro:hasRole name="a">
-				isAdmin = true;
-			</shiro:hasRole>
-			if(!isAdmin){
-				$(document).prohibitRight().prohibitCopy();
-			}
 			//$("#name").focus();
 			$("#inputForm").validate({
 				submitHandler: function(form){
@@ -47,7 +40,7 @@
 		<li><a href="${ctx}/bg/bgCase/">案件列表</a></li>
 		<li class="active"><a href="${ctx}/bg/bgCase/form?id=${bgCase.id}">案件<shiro:hasPermission name="bg:bgCase:edit">${not empty bgCase.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="bg:bgCase:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
-	<form:form id="inputForm" modelAttribute="bgCase" action="${ctx}/bg/bgCase/save" method="post" class="form-horizontal">
+	<form:form id="inputForm" modelAttribute="bgCase" action="${ctx}/bg/bgCase/save" method="post" class="form-horizontal disableCopy">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
 		<div class="control-group">

@@ -7,14 +7,7 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			
-			var isAdmin = false;
-			<shiro:hasRole name="a">
-				isAdmin = true;
-			</shiro:hasRole>
-			if(!isAdmin){
-				$(document).prohibitRight().prohibitCopy();
-			}
-			
+
 		});
 		function resetForm(){
 			$("#searchForm").find(".ul-form input[type='text']").val(null);
@@ -27,12 +20,12 @@
         }
 	</script>
 </head>
-<body>
+<body >
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="${ctx}/bg/bgCase/">单表列表</a></li>
 		<shiro:hasPermission name="bg:bgCase:edit"><li><a href="${ctx}/bg/bgCase/form">单表添加</a></li></shiro:hasPermission>
 	</ul>
-	<form:form id="searchForm" modelAttribute="bgCase" action="${ctx}/bg/bgCase/" method="post" class="breadcrumb form-search">
+	<form:form id="searchForm" modelAttribute="bgCase" action="${ctx}/bg/bgCase/" method="post" class="breadcrumb form-search disableCopy">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
@@ -90,7 +83,7 @@
 		</ul>
 	</form:form>
 	<sys:message content="${message}"/>
-	<table id="contentTable" class="table table-striped table-bordered table-condensed">
+	<table id="contentTable" class="table table-striped table-bordered table-condensed disableCopy">
 		<thead>
 			<tr>
 				<th>更新时间</th>

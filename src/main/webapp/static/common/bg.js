@@ -22,11 +22,18 @@ $.fn.extend({
 		$(this).on("copy",function () {
             return false;
         });
+        $(this).on("cut",function () {
+            return false;
+        });
 		$(this).on("keydown",function (e) {
-			if(e.which == "22"){ 
+			if(e.which == "22"){
 			// press Ctrl+V keyboard 
 				 return false;
-			}else{
+			}else if(e.which == "88"){
+                // press Ctrl+X keyboard
+                return false;
+            }else{
+
 				return true;
 			}
            
