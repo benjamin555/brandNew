@@ -109,7 +109,7 @@
 			<label class="control-label">客户：</label>
 			<div class="controls">
 <sys:listSelect id="customer" name="customerId" value="${bgCase.customerId }" labelName="customer" labelValue="${bgCase.customer.name}"
-					title="客户" url="/bg/bgCustomer/list?bgCustomer.name=${bgCase.customer.name}" cssClass="required"/>	
+					title="客户" url="/bg/bgCustomer/listHelp?bgCustomer.name=${bgCase.customer.name}" cssClass="required"/>
 					
 					<button class="btn-info" type="button" onclick="openDetail('${ctx}/bg/bgCustomer/detail?id=${bgCase.customerId }');">查看明细</button>	
 							</div>

@@ -104,6 +104,16 @@ public class BgCustomerController extends BaseController {
 		return JsonMapper.toJsonString(cs);
 	}
 
-
+	@RequiresPermissions("bg:bgCustomer:listHelp")
+	@RequestMapping(value = {"listHelp"})
+	public String listHelp(BgCustomer bgCustomer, HttpServletRequest request, HttpServletResponse response, Model model) {
+		String name = request.getParameter("bgCustomer.name");
+		if(StringUtils.isNotBlank(name)){
+			bgCustomer.setName(name);
+		}
+		Page<BgCustomer> page = bgCustomerService.findPage(new Page<BgCustomer>(request, response), bgCustomer);
+		model.addAttribute("page", page);
+		return "modules/bg/bgCustomerListHelp";
+	}
 
 }

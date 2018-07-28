@@ -100,7 +100,7 @@
 				<th>国家受通时间</th>
 				<th>驳回时间</th>
 				<th>拿证时间</th>
-				<shiro:hasPermission name="bg:bgCase:edit"><th>操作</th></shiro:hasPermission>
+				<th>操作</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -158,11 +158,8 @@
 					<fmt:formatDate value="${bgCase.certificateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
 				<td>
-    				<shiro:hasPermission name="bg:bgCase:edit"><a href="${ctx}/bg/bgCase/selfForm?id=${bgCase.id}">修改</a></shiro:hasPermission>
-
-<%--
-					<a href="${ctx}/bg/bgCaseFollow/form?caseId=${bgCase.id}">跟进</a>
---%>
+    				<a href="${ctx}/bg/bgCase/selfForm?id=${bgCase.id}">修改</a>
+					<a href="${ctx}/bg/bgCaseFollow/form?caseId=${bgCase.id}&returnUrl=/a/bg/bgCase/self">跟进</a>
 				</td>
 			</tr>
 		</c:forEach>

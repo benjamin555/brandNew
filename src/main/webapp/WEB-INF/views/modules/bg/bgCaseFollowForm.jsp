@@ -32,6 +32,7 @@
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="bgCaseFollow" action="${ctx}/bg/bgCaseFollow/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
+		<input type="hidden" name="LH_VIEW_OVERRIDE" value="${param.returnUrl}"/>
 		<sys:message content="${message}"/>		
 		<div class="control-group">
 			<label class="control-label">描述：</label>
