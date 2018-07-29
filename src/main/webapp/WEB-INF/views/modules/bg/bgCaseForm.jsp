@@ -15,8 +15,17 @@
 		
 		}
 		$(document).ready(function() {
-		
-			//$("#name").focus();
+		    $("#fixFee,#agentFee,#receiveFee").change(function(){
+				var fixFee = $("#fixFee").val();
+				var agentFee = $("#agentFee").val();
+				var receiveFee = $("#receiveFee").val();
+                fixFee = (isNaN(fixFee)?0:Number(fixFee));
+                agentFee = (isNaN(agentFee)?0:Number(agentFee));
+                receiveFee = isNaN(receiveFee)?0:Number(receiveFee);
+				var rest = fixFee + agentFee -receiveFee;
+				$("#phoneManId").val(rest);
+
+			});
 			$("#inputForm").validate({
 				submitHandler: function(form){
 					loading('正在提交，请稍等...');
@@ -78,7 +87,7 @@
 		<div class="control-group">
 			<label class="control-label">规费：</label>
 			<div class="controls">
-				<form:input path="fixFee" htmlEscape="false" class="input-xlarge "  />
+				<form:input path="fixFee"  htmlEscape="false"  class="input-xlarge number"  />
 			</div>
 		</div>
 		<div class="control-group">
@@ -151,6 +160,31 @@
 				<input name="certificateDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
 					value="<fmt:formatDate value="${bgCase.certificateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
 					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">跟进记录：</label>
+			<div class="controls">
+				<table id="contentTable" class="table table-striped table-bordered table-condensed">
+					<thead>
+					<tr>
+						<th>描述</th>
+						<th>提醒时间</th>
+					</tr>
+					</thead>
+					<tbody >
+					<c:forEach var="item" items="${bgCase.bgCaseFollowList}">
+						<tr>
+							<td>${item.descrip}</td>
+							<td><fmt:formatDate value="${item.remindTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+						</tr>
+
+					</c:forEach>
+
+					</tbody>
+					<tfoot>
+					</tfoot>
+				</table>
 			</div>
 		</div>
 		<div class="form-actions">

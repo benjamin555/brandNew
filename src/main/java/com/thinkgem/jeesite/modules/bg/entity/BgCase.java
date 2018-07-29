@@ -27,7 +27,7 @@ public class BgCase extends DataEntity<BgCase> {
 	private Double fixFee;		// 规费
 	private Double agentFee;		// 代理费
 	private Double receiveFee;		// 已收金额
-	private String phoneManId;		// 话务员
+	private String phoneManId;		// 话务员,修改成欠费栏
 	private String businessManId;		// 业务员的名字
 	private String customerId;		// 客户
 	private Integer feedbackMonth;		// 提成月份
