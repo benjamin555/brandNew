@@ -15,7 +15,17 @@
 		
 		}
 		$(document).ready(function() {
-		
+            $("#fixFee,#agentFee,#receiveFee").change(function(){
+                var fixFee = $("#fixFee").val();
+                var agentFee = $("#agentFee").val();
+                var receiveFee = $("#receiveFee").val();
+                fixFee = (isNaN(fixFee)?0:Number(fixFee));
+                agentFee = (isNaN(agentFee)?0:Number(agentFee));
+                receiveFee = isNaN(receiveFee)?0:Number(receiveFee);
+                var rest = fixFee + agentFee -receiveFee;
+                $("#phoneManId").val(rest);
+
+            });
 			//$("#name").focus();
 			$("#inputForm").validate({
 				submitHandler: function(form){
