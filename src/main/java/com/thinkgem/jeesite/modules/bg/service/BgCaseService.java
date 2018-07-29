@@ -5,6 +5,9 @@ package com.thinkgem.jeesite.modules.bg.service;
 
 import java.util.List;
 
+import com.thinkgem.jeesite.modules.bg.dao.BgCaseFollowDao;
+import com.thinkgem.jeesite.modules.bg.entity.BgCaseFollow;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,9 +24,18 @@ import com.thinkgem.jeesite.modules.bg.dao.BgCaseDao;
 @Service
 @Transactional(readOnly = true)
 public class BgCaseService extends CrudService<BgCaseDao, BgCase> {
+	@Autowired
+	private BgCaseFollowDao bgCaseFollowDao;
 
 	public BgCase get(String id) {
-		return super.get(id);
+		BgCase bg = super.get(id);
+		//加载跟进记录
+		BgCaseFollow bcf = new BgCaseFollow();
+		bcf.setCaseId(bg.getId());
+		List<BgCaseFollow> bs = bgCaseFollowDao.findList(bcf);
+		bg.setBgCaseFollowList(bs);
+		return bg;
+
 	}
 	
 	public List<BgCase> findList(BgCase bgCase) {

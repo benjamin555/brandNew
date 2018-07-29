@@ -153,6 +153,33 @@
 					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
 			</div>
 		</div>
+
+        <div class="control-group">
+            <label class="control-label">跟进记录：</label>
+            <div class="controls">
+                <table id="contentTable" class="table table-striped table-bordered table-condensed">
+                    <thead>
+                    <tr>
+                        <th>描述</th>
+                        <th>提醒时间</th>
+                    </tr>
+                    </thead>
+                    <tbody >
+                    <c:forEach var="item" items="${bgCase.bgCaseFollowList}">
+                        <tr>
+                            <td>${item.descrip}</td>
+                            <td><fmt:formatDate value="${item.remindTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                        </tr>
+
+                    </c:forEach>
+
+                    </tbody>
+                   <tfoot>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
 		<div class="form-actions">
 			<shiro:hasPermission name="bg:bgCase:selfEdit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>

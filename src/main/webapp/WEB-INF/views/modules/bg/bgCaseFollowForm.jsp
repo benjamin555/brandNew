@@ -27,7 +27,6 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/bg/bgCaseFollow/?caseId=${bgCaseFollow.caseId}">案例进度列表</a></li>
 		<li class="active"><a href="${ctx}/bg/bgCaseFollow/form?id=${bgCaseFollow.id}">案例进度<shiro:hasPermission name="bg:bgCaseFollow:edit">${not empty bgCaseFollow.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="bg:bgCaseFollow:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="bgCaseFollow" action="${ctx}/bg/bgCaseFollow/save" method="post" class="form-horizontal">

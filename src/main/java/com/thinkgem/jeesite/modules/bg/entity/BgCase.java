@@ -4,7 +4,9 @@
 package com.thinkgem.jeesite.modules.bg.entity;
 
 import java.util.Date;
+import java.util.List;
 
+import com.google.common.collect.Lists;
 import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -33,7 +35,17 @@ public class BgCase extends DataEntity<BgCase> {
 	private Date acceptDate;		// 国家受通时间
 	private Date rejectDate;		// 驳回时间
 	private Date certificateDate;		// 拿证时间
-	
+	private List<BgCaseFollow> bgCaseFollowList = Lists.newArrayList();		// 拿证时间
+
+
+	public List<BgCaseFollow> getBgCaseFollowList() {
+		return bgCaseFollowList;
+	}
+
+	public void setBgCaseFollowList(List<BgCaseFollow> bgCaseFollowList) {
+		this.bgCaseFollowList = bgCaseFollowList;
+	}
+
 	/**
 	 * 联系人名称字符串拼接
 	 */
