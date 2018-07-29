@@ -10,6 +10,15 @@
 			$("#inputForm").validate({
 				submitHandler: function(form){
 					loading('正在提交，请稍等...');
+
+					//联系人列表
+					var len = $("#bgContacterList tr").length;
+					if(len<=0){
+                        closeTip();
+                        alertx("联系人不能为空。");
+					    return false;
+					}
+
 					form.submit();
 				},
 				errorContainer: "#messageBox",
@@ -110,10 +119,10 @@
 								<textarea id="bgContacterList{{idx}}_remarks" name="bgContacterList[{{idx}}].remarks" rows="4" maxlength="255" class="input-small ">{{row.remarks}}</textarea>
 							</td>
 							<td>
-								<input id="bgContacterList{{idx}}_name" name="bgContacterList[{{idx}}].name" type="text" value="{{row.name}}" maxlength="64" class="input-small "/>
+								<input id="bgContacterList{{idx}}_name" name="bgContacterList[{{idx}}].name" type="text" value="{{row.name}}" maxlength="64" class="input-small required"/>
 							</td>
 							<td>
-								<input id="bgContacterList{{idx}}_mobileNumber" name="bgContacterList[{{idx}}].mobileNumber" type="text" value="{{row.mobileNumber}}" maxlength="20" class="input-small "/>
+								<input id="bgContacterList{{idx}}_mobileNumber" name="bgContacterList[{{idx}}].mobileNumber" type="text" value="{{row.mobileNumber}}" maxlength="20" class="input-small required"/>
 							</td>
 							<td>
 								<input id="bgContacterList{{idx}}_fixedPhoneNumber" name="bgContacterList[{{idx}}].fixedPhoneNumber" type="text" value="{{row.fixedPhoneNumber}}" maxlength="20" class="input-small "/>
