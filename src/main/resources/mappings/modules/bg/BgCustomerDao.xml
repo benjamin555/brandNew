@@ -111,5 +111,40 @@
 			del_flag = #{DEL_FLAG_DELETE}
 		WHERE id = #{id}
 	</update>
-	
+
+	<select id="findListByBusinessMan" resultType="BgCustomer">
+		SELECT distinct
+		<include refid="bgCustomerColumns"/>
+		FROM bg_customer a
+		<include refid="bgCustomerJoins"/>
+		left join bg_case c on c.customer_id = a.id
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<!-- 业务员或者是新建的人员 -->
+			and ( c.business_man_id = #{businessMan} or  a.create_by = #{currentUser.id})
+			<if test="name != null and name != ''">
+				AND a.name LIKE
+				<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+				<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			<if test="bgContacterList != null and bgContacterList.size>0  ">
+				<if test="bgContacterList[0].mobileNumber!=''">
+					AND b.mobile_number LIKE concat('%',#{bgContacterList[0].mobileNumber},'%')
+				</if>
+				<if test="bgContacterList[0].name!=''">
+					AND b.name LIKE concat('%',#{bgContacterList[0].name},'%')
+				</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+
 </mapper>

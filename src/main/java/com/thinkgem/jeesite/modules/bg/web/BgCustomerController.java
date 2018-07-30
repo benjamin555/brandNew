@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -114,6 +115,26 @@ public class BgCustomerController extends BaseController {
 		Page<BgCustomer> page = bgCustomerService.findPage(new Page<BgCustomer>(request, response), bgCustomer);
 		model.addAttribute("page", page);
 		return "modules/bg/bgCustomerListHelp";
+	}
+
+	@RequiresPermissions("bg:bgCustomer:self")
+	@RequestMapping(value = {"self"})
+	public String self(BgCustomer bgCustomer, HttpServletRequest request, HttpServletResponse response, Model model) {
+		String name = request.getParameter("bgCustomer.name");
+		if(StringUtils.isNotBlank(name)){
+			bgCustomer.setName(name);
+		}
+		bgCustomer.setBusinessMan(UserUtils.getUser().getName());
+		Page<BgCustomer> page = bgCustomerService.findPageByBusinessMan(new Page<BgCustomer>(request, response), bgCustomer);
+		model.addAttribute("page", page);
+		return "modules/bg/bgCustomerListSelf";
+	}
+
+	@RequiresPermissions("bg:bgCustomer:self")
+	@RequestMapping(value = "selfForm")
+	public String selfForm(BgCustomer bgCustomer, Model model) {
+		model.addAttribute("bgCustomer", bgCustomer);
+		return "modules/bg/bgCustomerSelfForm";
 	}
 
 }

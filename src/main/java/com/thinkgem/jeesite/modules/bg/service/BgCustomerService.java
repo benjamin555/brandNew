@@ -79,5 +79,10 @@ public class BgCustomerService extends CrudService<BgCustomerDao, BgCustomer> {
 		super.delete(bgCustomer);
 		bgContacterDao.delete(new BgContacter(bgCustomer));
 	}
-	
+
+    public Page<BgCustomer> findPageByBusinessMan(Page<BgCustomer> bgCustomerPage, BgCustomer bgCustomer) {
+		bgCustomer.setPage(bgCustomerPage);
+		bgCustomerPage.setList(dao.findListByBusinessMan(bgCustomer));
+		return bgCustomerPage;
+	}
 }
