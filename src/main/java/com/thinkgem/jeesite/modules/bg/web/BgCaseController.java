@@ -150,4 +150,19 @@ public class BgCaseController extends BaseController {
 		return "redirect:"+Global.getAdminPath()+"/bg/bgCase/self?repage";
 	}
 
+	@RequiresPermissions("bg:bgCase:transfer")
+	@RequestMapping(value = "forTransfer")
+	public String forTransfer(BgCase bgCase, Model model) {
+		model.addAttribute("bgCase", bgCase);
+		return "modules/bg/bgCaseForTransfer";
+	}
+
+	@RequiresPermissions("bg:bgCase:transfer")
+	@RequestMapping(value = "transfer")
+	public String transfer(BgCase bgCase, Model model, RedirectAttributes redirectAttributes) {
+//		bgCaseService.save(bgCase);
+		addMessage(redirectAttributes, "操作成功");
+		return "redirect:"+Global.getAdminPath()+"/bg/bgCase/forTransfer";
+	}
+
 }
