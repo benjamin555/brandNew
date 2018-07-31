@@ -46,24 +46,23 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/bg/bgCase/">案件业务员调整</a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="bgCase" action="${ctx}/bg/bgCase/transfer" method="post" class="form-horizontal ">
 		<sys:message content="${message}"/>
 		<div class="control-group">
 			<label class="control-label">原业务员：</label>
 			<div class="controls">
-				<form:input path="old" htmlEscape="false" maxlength="64" class="input-xlarge required"/>
+				<form:input path="oldBusinessMan" htmlEscape="false" maxlength="64" class="input-xlarge required"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">新业务员：</label>
 			<div class="controls">
-				<form:input path="new" htmlEscape="false" maxlength="64" class="input-xlarge required"/>
+				<form:input path="newBusinessMan" htmlEscape="false" maxlength="64" class="input-xlarge required"/>
 			</div>
 		</div>
 		<div class="form-actions">
-			<shiro:hasPermission name="bg:bgCase:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
+			<shiro:hasPermission name="bg:bgCase:transfer"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
 		</div>
 	</form:form>

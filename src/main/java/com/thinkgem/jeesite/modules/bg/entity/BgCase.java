@@ -54,7 +54,26 @@ public class BgCase extends DataEntity<BgCase> {
 	private BgCustomer customer;
 	
 	private BgContacter contacter;
-	
+
+	private String oldBusinessMan;
+	private String newBusinessMan;
+
+	public String getOldBusinessMan() {
+		return oldBusinessMan;
+	}
+
+	public void setOldBusinessMan(String oldBusinessMan) {
+		this.oldBusinessMan = oldBusinessMan;
+	}
+
+	public String getNewBusinessMan() {
+		return newBusinessMan;
+	}
+
+	public void setNewBusinessMan(String newBusinessMan) {
+		this.newBusinessMan = newBusinessMan;
+	}
+
 	public BgCase() {
 		super();
 	}

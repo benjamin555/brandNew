@@ -83,14 +83,18 @@ public class BgCaseController extends BaseController {
 	@RequiresPermissions("bg:bgCase:view")
 	@RequestMapping(value = "form")
 	public String form(BgCase bgCase, Model model) {
-		bgCase.setBusinessManId(UserUtils.getUser().getName());
+		if(StringUtils.isEmpty(bgCase.getId())){
+			bgCase.setBusinessManId(UserUtils.getUser().getName());
+		}
 		model.addAttribute("bgCase", bgCase);
 		return "modules/bg/bgCaseForm";
 	}
 	@RequiresPermissions("bg:bgCase:selfEdit")
 	@RequestMapping(value = "selfForm")
 	public String selfForm(BgCase bgCase, Model model) {
-		bgCase.setBusinessManId(UserUtils.getUser().getName());
+		if(StringUtils.isEmpty(bgCase.getId())){
+			bgCase.setBusinessManId(UserUtils.getUser().getName());
+		}
 		model.addAttribute("bgCase", bgCase);
 		return "modules/bg/bgCaseSelfForm";
 	}
@@ -160,7 +164,7 @@ public class BgCaseController extends BaseController {
 	@RequiresPermissions("bg:bgCase:transfer")
 	@RequestMapping(value = "transfer")
 	public String transfer(BgCase bgCase, Model model, RedirectAttributes redirectAttributes) {
-//		bgCaseService.save(bgCase);
+		bgCaseService.transfer(bgCase.getOldBusinessMan(),bgCase.getNewBusinessMan());
 		addMessage(redirectAttributes, "操作成功");
 		return "redirect:"+Global.getAdminPath()+"/bg/bgCase/forTransfer";
 	}

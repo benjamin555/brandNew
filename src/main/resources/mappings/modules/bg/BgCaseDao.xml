@@ -3,6 +3,7 @@
 <mapper namespace="com.thinkgem.jeesite.modules.bg.dao.BgCaseDao">
     
 	<sql id="bgCaseColumns">
+       DISTINCT
 		a.create_by AS "createBy.id",
 		a.create_date AS "createDate",
 		a.update_by AS "updateBy.id",
