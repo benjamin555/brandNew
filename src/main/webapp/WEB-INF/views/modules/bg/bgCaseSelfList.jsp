@@ -46,7 +46,7 @@
 			<li><label>客户：</label>
 					
 				<sys:listSelect id="customer" name="customerId" value="${customerId }" labelName="customer" labelValue="${customer.name}"
-					title="客户" url="/bg/bgCustomer/list" cssClass="required"/>	
+					title="客户" url="/bg/bgCustomer/listHelp" cssClass="required"/>
 			</li>
 			<li><label>提成月份：</label>
 				<form:input path="feedbackMonth" htmlEscape="false" maxlength="11" class="input-medium"/>
