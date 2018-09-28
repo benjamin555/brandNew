@@ -62,7 +62,7 @@
 				AND a.item_name = #{itemName}
 			</if>
 			<if test="regNo != null and regNo != ''">
-				AND a.reg_no = #{regNo}
+				AND a.reg_no like concat('%',#{regNo},'%')
 			</if>
 			<if test="phoneManId != null and phoneManId != ''">
 				AND a.phone_man_id = #{phoneManId}

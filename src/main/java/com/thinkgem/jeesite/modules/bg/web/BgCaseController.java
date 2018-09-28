@@ -8,6 +8,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.thinkgem.jeesite.modules.bg.entity.BgCaseFollow;
+import com.thinkgem.jeesite.modules.bg.service.BgCaseFollowService;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Transformer;
@@ -42,7 +44,8 @@ public class BgCaseController extends BaseController {
 	private BgCaseService bgCaseService;
 	@Autowired
 	private BgCustomerService bgCustomerService;
-	
+	@Autowired
+	private BgCaseFollowService bgCaseFollowService;
 	
 	@ModelAttribute
 	public BgCase get(@RequestParam(required=false) String id) {
@@ -73,7 +76,9 @@ public class BgCaseController extends BaseController {
 				bgCase2.setContacters(org.apache.commons.lang3.StringUtils.join(ls));
 				logger.info("contacters:{}",bgCase2.getContacters());
 			}
-			
+
+
+
 		}
 		
 		model.addAttribute("page", page);
@@ -138,6 +143,10 @@ public class BgCaseController extends BaseController {
 				bgCase2.setContacters(org.apache.commons.lang3.StringUtils.join(ls));
 				logger.info("contacters:{}",bgCase2.getContacters());
 			}
+			//获取跟进记录
+			BgCaseFollow bcf = new BgCaseFollow();
+			bcf.setCaseId(bgCase2.getId());
+			bgCase2.setBgCaseFollowList(bgCaseFollowService.findList(bcf));
 
 		}
 		model.addAttribute("page", page);

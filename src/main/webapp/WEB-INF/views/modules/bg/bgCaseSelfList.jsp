@@ -100,6 +100,7 @@
 				<th>国家受通时间</th>
 				<th>驳回时间</th>
 				<th>拿证时间</th>
+				<th>跟进</th>
 				<th>操作</th>
 			</tr>
 		</thead>
@@ -157,6 +158,7 @@
 				<td>
 					<fmt:formatDate value="${bgCase.certificateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
+				<td>${bgCase.bgCaseFollowList}</td>
 				<td>
     				<a href="${ctx}/bg/bgCase/selfForm?id=${bgCase.id}">修改</a>
 					<a href="${ctx}/bg/bgCaseFollow/form?caseId=${bgCase.id}&returnUrl=/a/bg/bgCase/self">跟进</a>

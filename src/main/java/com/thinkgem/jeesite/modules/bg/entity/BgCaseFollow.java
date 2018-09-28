@@ -55,5 +55,9 @@ public class BgCaseFollow extends DataEntity<BgCaseFollow> {
 	public void setRemindTime(Date remindTime) {
 		this.remindTime = remindTime;
 	}
-	
+
+	@Override
+	public String toString() {
+		return descrip;
+	}
 }
